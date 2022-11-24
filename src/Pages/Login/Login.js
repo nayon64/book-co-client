@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import CustomButton from "../../conponents/CustomButton/CustomButton";
 import { AuthContext } from "../../Context/AuthProvider/AuthProvider";
 import { GoogleAuthProvider } from "firebase/auth";
-import { Result } from "postcss";
+import toast from "react-hot-toast";
 
 const Login = () => {
 	const {register, handleSubmit } = useForm();
@@ -14,17 +14,30 @@ const Login = () => {
 
   const googleProvider =new GoogleAuthProvider()
   
-  const {signInWithProvider}=useContext(AuthContext)
+  const {logIn,signInWithProvider}=useContext(AuthContext)
 
 	const handleEmailAndPasswordLogin = data => {
-		console.log(data)
+    console.log(data)
+    logIn(data.email, data.password)
+      .then(result => {
+        const user = result.user
+        console.log(user)
+        toast.success("Successfully Login")
+      })
+      .catch(err => {
+      toast.error(err.message)
+    })
   }
+
+  // google login 
   const handleGoogleLogin = () => {
     signInWithProvider(googleProvider)
       .then(result => {
-      console.log(result)
+        console.log(result)
+        toast.success("Successfully Login");
       }).catch(err => {
-      console.log(err)
+        console.log(err)
+        toast.success(err.message);
     })
   }
 
@@ -83,7 +96,13 @@ const Login = () => {
             </div>
 
             <div className="form-control">
-              <CustomButton>Login</CustomButton>
+              <CustomButton>
+                <input
+                  className="w-full h-full cursor-pointer"
+                  type="submit"
+                  value="Login"
+                />
+              </CustomButton>
               {/* <button className="btn btn-primary">Login</button> */}
             </div>
           </form>

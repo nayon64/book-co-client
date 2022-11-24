@@ -6,16 +6,17 @@ import { AuthContext } from '../../Context/AuthProvider/AuthProvider';
 
 const Navbar = () => {
 
-  const {displayName}=useContext(AuthContext)
+  const { user, logOut } = useContext(AuthContext);
+
+  // const handleLogOut = () => {
+  //   logOut()
+  // }
 
 	// navbar menu item 
 	const menuItems = (
     <>
       <li>
         <Link to="/home">Home</Link>
-      </li>
-      <li>
-        <Link to="/home">{displayName}</Link>
       </li>
 
       <li>
@@ -63,9 +64,25 @@ const Navbar = () => {
           <ul className="menu menu-horizontal p-0">{menuItems}</ul>
         </div>
         <div className="navbar-end ">
-          <Link to="/login">
-            <CustomButton>Login</CustomButton>
-          </Link>
+          {user?.uid ? (
+            <>
+              <CustomButton><span onClick={logOut}>LogOut</span></CustomButton>
+              <div
+                className="tooltip tooltip-bottom"
+                data-tip={user.displayName}
+              >
+                <div className="avatar">
+                  <div className="w-10 ml-3 border rounded-full cursor-pointer">
+                    <img src={user.photoURL} alt="" />
+                  </div>
+                </div>
+              </div>
+            </>
+          ) : (
+            <Link to="/login">
+              <CustomButton>Login</CustomButton>
+            </Link>
+          )}
         </div>
       </div>
     </div>

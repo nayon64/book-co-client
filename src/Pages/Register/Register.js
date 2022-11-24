@@ -1,23 +1,87 @@
-import React, { useState } from 'react';
+
+import { GoogleAuthProvider } from 'firebase/auth';
+import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import {  Link } from 'react-router-dom';
 import googleImg from "../../assets/image/google.png"
 import CustomButton from '../../conponents/CustomButton/CustomButton';
+import { AuthContext } from '../../Context/AuthProvider/AuthProvider';
 
 const Register = () => {
 const { register, handleSubmit, formState: { errors } } = useForm();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmdPassword, setShowConfirmdPassword] = useState(false);
-  const [confirmdPasswordError, setConfirmdPasswordError] = useState("");
+	const [confirmdPasswordError, setConfirmdPasswordError] = useState("");
+	
+	const { createUser, updateUserProfile, signInWithProvider } =
+		useContext(AuthContext);
+	const googleProvider = new GoogleAuthProvider();
+	const imageHostKey = process.env.REACT_APP_imgbb_API_KEY;
 
+	// create user with email and password 
   const handleUserCreate = (data) => {
-	  console.log(data.password, data.confirmdPassword);
-	  setConfirmdPasswordError("")
-	  if (!(data.password === data.confirmdPassword)) {
-		  setConfirmdPasswordError("Your password doesn't match.")
-		  return;
-	  }
+    console.log(data.password, data.confirmdPassword);
+    setConfirmdPasswordError("");
+
+    //   match password and cofirmd password
+    if (!(data.password === data.confirmdPassword)) {
+      setConfirmdPasswordError("Your password doesn't match.");
+      return;
+    }
+
+    const image = data.img[0];
+    const formData = new FormData();
+    formData.append("image", image);
+
+    //   fetch image file in imgbb
+    fetch(`https://api.imgbb.com/1/upload?key=${imageHostKey}`, {
+      method: "POST",
+      body: formData,
+    })
+      .then((res) => res.json())
+      .then((imageData) => {
+        if (imageData?.data?.display_url) {
+          const imgUrl = imageData?.data?.display_url;
+          createUser(data.email, data.password)
+            .then((result) => {
+              const user = result.user;
+              console.log(user);
+
+              // update user name and imgurl
+              updateUserProfile({ displayName: data.name, photoURL: imgUrl })
+                .then(() => {
+                  toast.success("SuccessFully User Create");
+                })
+                .catch((err) => {
+                  toast.error(err.message);
+                });
+            })
+            .catch((err) => {
+              console.log(err);
+              toast.error(err.message);
+            });
+        }
+      });
+
+    // google login
+    
+    console.log(data.email, data.password, data.name, data.role, data.img[0]);
+    //   logIn()
+	};
+
+	// handle google login 
+	const handleGoogleLogin = () => {
+    signInWithProvider(googleProvider)
+      .then((result) => {
+		  console.log(result);
+		  toast.success("Successfully Login")
+      })
+      .catch((err) => {
+		  console.log(err);
+		  toast.error(err.message)
+      });
   };
 
 
@@ -51,6 +115,7 @@ const { register, handleSubmit, formState: { errors } } = useForm();
                 </span>
               </label>
               <input
+                {...register("img")}
                 type="file"
                 className="file-input file-input-md file-input-bordered "
               />
@@ -88,11 +153,11 @@ const { register, handleSubmit, formState: { errors } } = useForm();
                       value: 6,
                       message: "Please Enter 6 charecter.",
                     },
-                    pattern: {
-                      value:
-                        /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])/i,
-                      message: "Please storng your password.",
-                    },
+                    // pattern: {
+                    //   value:
+                    //     /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])/i,
+                    //   message: "Please storng your password.",
+                    // },
                   })}
                   className="input input-bordered rounded-lg  block w-full p-2.5 h-10"
                   placeholder="Enter your password"
@@ -192,7 +257,13 @@ const { register, handleSubmit, formState: { errors } } = useForm();
             </div>
 
             <div className="form-control">
-              <CustomButton>Register</CustomButton>
+              <CustomButton>
+                <input
+                  className="w-full h-full cursor-pointer"
+                  type="submit"
+                  value="Rgister"
+                />
+              </CustomButton>
             </div>
           </form>
           <p>
@@ -202,7 +273,10 @@ const { register, handleSubmit, formState: { errors } } = useForm();
             </Link>
           </p>
           <div className="divider text-secondary">OR</div>
-          <div className="border-2 rounded-lg flex justify-center cursor-pointer items-center">
+          <div
+            onClick={handleGoogleLogin}
+            className="border-2 rounded-lg flex justify-center cursor-pointer items-center"
+          >
             <img className="w-6 py-2" src={googleImg} alt="" />
             <span className="text-base ml-2 font-semibold">
               Log in with Google
