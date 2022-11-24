@@ -1,0 +1,35 @@
+[
+  {
+    "title": "What are the different ways to manage a state in a React application?",
+    "details": "There are many types of state. In this course, Managing React State, you'll learn how to effectively declare state to create rich, interactive React apps. First, you'll discover eight ways to handle state in React apps. Next, you'll explore how to manage each of these types of states including route state, component state, and refs in both function and class components.",
+    "img": "https://bs-uploads.toptal.io/blackfish-uploads/components/seo/content/og_image_file/og_image/1094992/image_5-0059967eb5450c477b154760cd8c8525-b228bd4760b1e5e5a69ab124d1e5dc7d.png",
+    "published date": "12 Dec 2022",
+    "author": "Himadri",
+    "email": "a@a.com"
+  },
+  {
+    "title": "How does prototypical inheritance work?",
+    "details": "The Prototypal Inheritance is a feature in javascript used to add methods and properties in objects. It is a method by which an object can inherit the properties and methods of another object. Traditionally, in order to get and set the [[Prototype]] of an object, we use Object. getPrototypeOf and Object",
+    "img": "https://community-cdn-digitalocean-com.global.ssl.fastly.net/PYWvYDcieoFzWhcx4zDFWmRU",
+    "published date": "05 Dec 2022",
+    "author": "Himadri",
+    "email": "a@a.com"
+  },
+  {
+    "title": "What is a unit test? Why should we write unit tests?",
+    "details": "The main objective of unit testing is to isolate written code to test and determine if it works as intended. Unit testing is an important step in the development process, because if done correctly, it can help detect early flaws in code which may be more difficult to find in later testing stages.",
+    "img": "https://media.geeksforgeeks.org/wp-content/cdn-uploads/20200514113957/What-is-Unit-Testing-and-Why-Developer-Should-Learn-It.png",
+    "published date": "12 Nov 2022",
+    "author": "Himadri",
+    "email": "a@a.com"
+  },
+  {
+    "title": "React vs. Angular vs. Vue?",
+    "details": "React is more suitable for intermediate to advanced JavaScript developers who are familiar with concepts from ES6 and up, while Angular favors those same developers who are also familiar with TypeScript.    Vue is generally more suited to smaller, less complex apps and is easier to learn from scratch compared to React.  Angular is generally better for more complex apps that are enterprise-ready.",
+    "img": "https://presence.agency/wp-content/uploads/2020/07/1_lC1kj3IeXoE8Z3OCKJoWkw.jpeg",
+    "published date": "06 Dec 2022",
+    "author": "Himadri",
+    "email": "a@a.com"
+  }
+  
+]
