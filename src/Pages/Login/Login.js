@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import googleImg from "../../assets/image/google.png"
 import { useForm } from "react-hook-form";
+import CustomButton from "../../conponents/CustomButton/CustomButton";
 
 const Login = () => {
 	const {register, handleSubmit } = useForm();
@@ -16,7 +17,7 @@ const Login = () => {
 	
   return (
     <div>
-      <div className="card flex-shrink-0 w-full mx-auto max-w-sm shadow-2xl bg-base-100">
+      <div className="card flex-shrink-0 mx-auto w-96 shadow-2xl bg-base-100">
         <div className="card-body">
           <form onSubmit={handleSubmit(handleEmailAndPasswordLogin)}>
             <h3 className="text-center text-primary text-xl font-bold">
@@ -32,7 +33,7 @@ const Login = () => {
                 {...register("email")}
                 type="email"
                 placeholder="email"
-                className="input input-bordered border-primary"
+                className="input input-bordered h-10"
               />
             </div>
             <div className="mb-4">
@@ -46,7 +47,7 @@ const Login = () => {
                 <input
                   type={showPassword ? "text" : "password"}
                   {...register("password")}
-                  className="input input-bordered border-primary text-sm rounded-lg  block w-full p-2.5 "
+                  className="input input-bordered text-sm rounded-lg  block w-full p-2.5 h-10"
                   placeholder="Enter your password"
                   required
                 />
@@ -65,14 +66,14 @@ const Login = () => {
                 </Link>
               </label>
             </div>
-            
 
             <div className="form-control">
-              <button className="btn btn-primary">Login</button>
+              <CustomButton>Login</CustomButton>
+              {/* <button className="btn btn-primary">Login</button> */}
             </div>
           </form>
           <p>
-            Create an account? <Link>Register</Link>
+            Create an account? <Link className="font-semibold text-primary" to="/register">Register</Link>
           </p>
           <div className="divider text-secondary">OR</div>
           <div className="border-2 rounded-lg flex justify-center cursor-pointer items-center">
