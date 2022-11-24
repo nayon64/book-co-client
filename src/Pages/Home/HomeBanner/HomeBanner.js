@@ -5,27 +5,27 @@ const HomeBanner = () => {
 	return (
     <div className="hero min-h-96">
       <div className="hero-content flex-col lg:flex-row-reverse ">
-        <div className='lg:w-1/2'>
+        <div className="lg:w-1/2">
           <img src={readingBook} className="w-full" alt="" />
         </div>
-        <div className='lg:w-1/2 text-center lg:text-start py-6'>
-          <h1 className="text-5xl  font-bold text-secondary">
-            Find the book your"re 
-            lookin for easier to read 
-            right away...
+        <div className="lg:w-1/2 text-center lg:text-start py-6">
+          <h1 className="text-5xl  font-bold text-primary leading-tight">
+            <span className="text-accent"> Sell</span> your unusable books and
+            <span className="text-accent"> buy</span> your necessary books
+            easily...
           </h1>
-          <p className="py-6 font-semibold text-xl text-primary">
-            Sell your unusable books and buy your favorite books.
+          <p className="py-6 font-semibold text-xl text-secondary">
+            Find the book your"re looking for easier to read right away.
           </p>
           <form>
             <div>
               <input
                 type="text"
                 placeholder="Search Here"
-                className="input input-bordered border-secondary w-full max-w-md"
+                className="input input-bordered border-primary w-full max-w-md"
               />
               <input
-                className="btn btn-secondary mt-6 md:mt-0 ml-6"
+                className="btn btn-primary mt-6 md:mt-0 ml-6"
                 type="submit"
                 value="Search"
               />

@@ -5,10 +5,10 @@ module.exports = {
     themes: [
       {
         bookAndCo: {
-          primary: "#1D3151",
-          secondary: "#4476AC",
+          primary: "#4476AC",
+          secondary: "#1D3151",
           accent: "#E06A4F",
-          neutral: "#EA9081",
+          neutral: "#3D4451",
           "base-100": "#FFFFFF",
         },
       },
