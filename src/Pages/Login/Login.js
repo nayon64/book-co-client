@@ -1,17 +1,32 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import googleImg from "../../assets/image/google.png"
 import { useForm } from "react-hook-form";
 import CustomButton from "../../conponents/CustomButton/CustomButton";
+import { AuthContext } from "../../Context/AuthProvider/AuthProvider";
+import { GoogleAuthProvider } from "firebase/auth";
+import { Result } from "postcss";
 
 const Login = () => {
 	const {register, handleSubmit } = useForm();
-	const [showPassword, setShowPassword] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+
+  const googleProvider =new GoogleAuthProvider()
+  
+  const {signInWithProvider}=useContext(AuthContext)
 
 	const handleEmailAndPasswordLogin = data => {
 		console.log(data)
-	}
+  }
+  const handleGoogleLogin = () => {
+    signInWithProvider(googleProvider)
+      .then(result => {
+      console.log(result)
+      }).catch(err => {
+      console.log(err)
+    })
+  }
 
 	
 	
@@ -25,7 +40,7 @@ const Login = () => {
             </h3>
             <div className="form-control mb-4">
               <label className="label">
-                <span className="label-text text-secondary font-medium">
+                <span className="label-text text-secondary text-base font-medium">
                   Email
                 </span>
               </label>
@@ -39,7 +54,7 @@ const Login = () => {
             <div className="mb-4">
               <label
                 htmlFor="password"
-                className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                className="block mb-2 text-base font-medium text-gray-900 dark:text-gray-300"
               >
                 Password
               </label>
@@ -73,10 +88,16 @@ const Login = () => {
             </div>
           </form>
           <p>
-            Create an account? <Link className="font-semibold text-primary" to="/register">Register</Link>
+            Create an account?{" "}
+            <Link className="font-semibold text-primary" to="/register">
+              Register
+            </Link>
           </p>
           <div className="divider text-secondary">OR</div>
-          <div className="border-2 rounded-lg flex justify-center cursor-pointer items-center">
+          <div
+            onClick={handleGoogleLogin}
+            className="border-2 rounded-lg flex justify-center cursor-pointer items-center"
+          >
             <img className="w-6 py-2" src={googleImg} alt="" />
             <span className="text-base ml-2 font-semibold">
               Log in with Google

@@ -1,16 +1,21 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import logo from "../../assets/image/logo.png"
 import CustomButton from '../../conponents/CustomButton/CustomButton';
+import { AuthContext } from '../../Context/AuthProvider/AuthProvider';
 
 const Navbar = () => {
 
+  const {displayName}=useContext(AuthContext)
 
 	// navbar menu item 
 	const menuItems = (
     <>
       <li>
         <Link to="/home">Home</Link>
+      </li>
+      <li>
+        <Link to="/home">{displayName}</Link>
       </li>
 
       <li>

@@ -15,7 +15,8 @@ const { register, handleSubmit, formState: { errors } } = useForm();
 	  console.log(data.password, data.confirmdPassword);
 	  setConfirmdPasswordError("")
 	  if (!(data.password === data.confirmdPassword)) {
-		 setConfirmdPasswordError("Your password doesn't match.")
+		  setConfirmdPasswordError("Your password doesn't match.")
+		  return;
 	  }
   };
 
@@ -32,7 +33,7 @@ const { register, handleSubmit, formState: { errors } } = useForm();
             </h3>
             <div className="form-control">
               <label className="label pb-1">
-                <span className="block text-md font-medium text-secondary">
+                <span className="block text-base font-medium text-secondary">
                   Full Name
                 </span>
               </label>
@@ -45,7 +46,7 @@ const { register, handleSubmit, formState: { errors } } = useForm();
             </div>
             <div className="form-control mt-1">
               <label className="label pb-1">
-                <span className="block text-md font-medium text-secondary">
+                <span className="block text-base font-medium text-secondary">
                   Select Your Image
                 </span>
               </label>
@@ -56,7 +57,7 @@ const { register, handleSubmit, formState: { errors } } = useForm();
             </div>
             <div className="form-control">
               <label className="label pb-1">
-                <span className="block text-md font-medium text-secondary">
+                <span className="block text-base font-medium text-secondary">
                   Email
                 </span>
               </label>
@@ -74,7 +75,7 @@ const { register, handleSubmit, formState: { errors } } = useForm();
             <div className="mt-3 form-control">
               <label
                 htmlFor="password"
-                className="block pb-1 text-md font-medium text-secondary"
+                className="block pb-1 text-base font-medium text-secondary"
               >
                 Password
               </label>
@@ -114,7 +115,7 @@ const { register, handleSubmit, formState: { errors } } = useForm();
             <div className="mt-3 form-control">
               <label
                 htmlFor="password"
-                className="block pb-1 text-md font-medium text-secondary"
+                className="block pb-1 text-base font-medium text-secondary"
               >
                 Confirmd Password
               </label>
