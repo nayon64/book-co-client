@@ -2,27 +2,26 @@ import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import Loader from '../../../conponents/Loader/Loader';
 
-const AllSellers = () => {
+const AllBuyers = () => {
+	const { data: allBuyers = [], isLoading } = useQuery({
+    queryKey: ["buyers"],
+    queryFn: async () => {
+      const res = await fetch("http://localhost:5000/allBuyers");
+      const data = await res.json();
+      return data;
+    },
+  });
 
-	const {data:allSellers=[] ,isLoading} = useQuery({
-		queryKey: ["sellers"],
-		queryFn: async () => {
-			const res = await fetch("http://localhost:5000/allSellers");
-			const data = await res.json()
-			return data
-		}
-	})
+  if (isLoading) {
+    return <Loader></Loader>;
+  }
 
-	if (isLoading) {
-		return <Loader></Loader>
-	}
-
-	return (
+  return (
     <div className="min-h-screen border rounded-md ml-4">
       <h2 className="text-3xl text-primary font-bold text-center mt-4 md:mt-6 mb-4">
-        All Sellers
+        All Buyers
       </h2>
-      {allSellers && (
+      {allBuyers && (
         <div className="overflow-x-auto mx-4 md:mx-6">
           <table className="table table-compact w-full">
             <thead>
@@ -34,11 +33,11 @@ const AllSellers = () => {
               </tr>
             </thead>
             <tbody>
-              {allSellers.map((seller, i) => (
+              {allBuyers.map((buyer, i) => (
                 <tr key={i}>
                   <th>{i + 1}</th>
-                  <td>{seller.name}</td>
-                  <td>{seller.email}</td>
+                  <td>{buyer.name}</td>
+                  <td>{buyer.email}</td>
                   <td className="text-end">
                     <button className="btn sm:btn-sm btn-xs btn-accent text-white rounded">
                       Delete
@@ -53,14 +52,13 @@ const AllSellers = () => {
           </table>
         </div>
       )}
-      {!allSellers && (
+      {!allBuyers && (
         <h2 className="text-3xl text-primary font-bold text-center my-4">
-          
-          No Seller Found
+          No Buyer Found
         </h2>
       )}
     </div>
   );
 };
 
-export default AllSellers;
+export default AllBuyers;
