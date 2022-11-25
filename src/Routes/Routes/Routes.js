@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import DashboardLayout from "../../Layout/DashboardLayout/DashboardLayout";
 import Main from "../../Layout/Main/Main";
 import Blogs from "../../Pages/Blogs/Blogs";
+import AllSellers from "../../Pages/Dashboard/AllSellers/AllSellers";
 import Dashboard from "../../Pages/Dashboard/Dashboard/Dashboard";
 import Error404 from "../../Pages/Error404/Error404";
 import Home from "../../Pages/Home/Home/Home";
@@ -43,20 +44,25 @@ const router = createBrowserRouter([
             <SingleCategory></SingleCategory>
           </PrivateRoute>
         ),
-        loader: ({ params }) => fetch(`http://localhost:5000/books/${params.id}`),
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/books/${params.id}`),
       },
     ],
   },
   {
     path: "/dashboard",
-    errorElement:<Error404></Error404>,
+    errorElement: <Error404></Error404>,
     element: <DashboardLayout></DashboardLayout>,
     children: [
       {
         path: "/dashboard",
-        element:<Dashboard></Dashboard>
-      }
-    ]
-  }
+        element: <Dashboard></Dashboard>,
+      },
+      {
+        path: "/dashboard/allsellers",
+        element: <AllSellers></AllSellers>,
+      },
+    ],
+  },
 ]);
 export default router;
