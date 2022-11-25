@@ -9,7 +9,7 @@ import { GoogleAuthProvider } from "firebase/auth";
 import toast from "react-hot-toast";
 
 const Login = () => {
-	const {register, handleSubmit } = useForm();
+	const {register, handleSubmit ,reset} = useForm();
   const [showPassword, setShowPassword] = useState(false);
 
   const googleProvider =new GoogleAuthProvider()
@@ -23,6 +23,7 @@ const Login = () => {
         const user = result.user
         console.log(user)
         toast.success("Successfully Login")
+        reset()
       })
       .catch(err => {
       toast.error(err.message)
@@ -33,11 +34,28 @@ const Login = () => {
   const handleGoogleLogin = () => {
     signInWithProvider(googleProvider)
       .then(result => {
-        console.log(result)
-        toast.success("Successfully Login");
-      }).catch(err => {
+         const user = {
+           name: result.user.displayName,
+           email: result.user.email,
+           role: "Buyer",
+         };
+        
+        fetch("http://localhost:5000/users", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(user),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            toast.success("Successfully Login");
+          });
+      })
+      .catch(err => {
         console.log(err)
-        toast.success(err.message);
+        toast.error(err.message);
     })
   }
 

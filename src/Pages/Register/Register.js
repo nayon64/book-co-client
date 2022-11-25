@@ -1,26 +1,32 @@
-
-import { GoogleAuthProvider } from 'firebase/auth';
-import React, { useContext, useState } from 'react';
-import { useForm } from 'react-hook-form';
-import toast from 'react-hot-toast';
-import { FaEye, FaEyeSlash } from 'react-icons/fa';
-import {  Link } from 'react-router-dom';
-import googleImg from "../../assets/image/google.png"
-import CustomButton from '../../conponents/CustomButton/CustomButton';
-import { AuthContext } from '../../Context/AuthProvider/AuthProvider';
+import { GoogleAuthProvider } from "firebase/auth";
+import React, { useContext, useState } from "react";
+import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { Link } from "react-router-dom";
+import googleImg from "../../assets/image/google.png";
+import CustomButton from "../../conponents/CustomButton/CustomButton";
+import { AuthContext } from "../../Context/AuthProvider/AuthProvider";
 
 const Register = () => {
-const { register, handleSubmit, formState: { errors } } = useForm();
+  const {
+    register,reset,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmdPassword, setShowConfirmdPassword] = useState(false);
-	const [confirmdPasswordError, setConfirmdPasswordError] = useState("");
-	
-	const { createUser, updateUserProfile, signInWithProvider } =
-		useContext(AuthContext);
-	const googleProvider = new GoogleAuthProvider();
-	const imageHostKey = process.env.REACT_APP_imgbb_API_KEY;
+  const [confirmdPasswordError, setConfirmdPasswordError] = useState("");
 
-	// create user with email and password 
+  const { createUser, updateUserProfile, signInWithProvider } =
+    useContext(AuthContext);
+  
+  const googleProvider = new GoogleAuthProvider();
+
+  const imageHostKey = process.env.REACT_APP_imgbb_API_KEY;
+
+  // create user with email and password
   const handleUserCreate = (data) => {
     console.log(data.password, data.confirmdPassword);
     setConfirmdPasswordError("");
@@ -52,7 +58,25 @@ const { register, handleSubmit, formState: { errors } } = useForm();
               // update user name and imgurl
               updateUserProfile({ displayName: data.name, photoURL: imgUrl })
                 .then(() => {
+                  const createUser = {
+                    name: data.name,
+                    email: data.email,
+                    role: data.role,
+                  };
+                  console.log(createUser);
                   toast.success("SuccessFully User Create");
+                  fetch("http://localhost:5000/users", {
+                    method: "POST",
+                    headers: {
+                      "content-type": "application/json",
+                    },
+                    body: JSON.stringify(createUser),
+                  })
+                    .then((res) => res.json())
+                    .then((data) => {
+                      console.log(data);
+                      reset()
+                    });
                 })
                 .catch((err) => {
                   toast.error(err.message);
@@ -65,29 +89,40 @@ const { register, handleSubmit, formState: { errors } } = useForm();
         }
       });
 
-    // google login
-    
-    console.log(data.email, data.password, data.name, data.role, data.img[0]);
-    //   logIn()
-	};
+  };
 
-	// handle google login 
-	const handleGoogleLogin = () => {
+  // handle google login
+  const handleGoogleLogin = () => {
     signInWithProvider(googleProvider)
       .then((result) => {
-		  console.log(result);
-		  toast.success("Successfully Login")
+        console.log(result);
+
+        const user = {
+          name: result.user.displayName,
+          email: result.user.email,
+          role: "Buyer",
+        };
+
+        fetch("http://localhost:5000/users", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(user),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+          });
+        toast.success("Successfully Login");
       })
       .catch((err) => {
-		  console.log(err);
-		  toast.error(err.message)
+        console.log(err);
+        toast.error(err.message);
       });
   };
 
-
-
-
-	return (
+  return (
     <div>
       <div className="card flex-shrink-0 mx-auto w-96 shadow-2xl bg-base-100">
         <div className="card-body w-full">
