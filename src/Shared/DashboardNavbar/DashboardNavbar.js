@@ -1,20 +1,20 @@
-import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
-import logo from "../../assets/image/logo.png"
-import CustomButton from '../../conponents/CustomButton/CustomButton';
-import { AuthContext } from '../../Context/AuthProvider/AuthProvider';
+import React, { useContext } from "react";
+import { Link } from "react-router-dom";
+import logo from "../../assets/image/logo.png";
+import CustomButton from "../../conponents/CustomButton/CustomButton";
+import { AuthContext } from "../../Context/AuthProvider/AuthProvider";
 
-const Navbar = () => {
-
+const DashboardNavbar = () => {
   const { user, logOut } = useContext(AuthContext);
 
   // const handleLogOut = () => {
   //   logOut()
   // }
 
-	// navbar menu item 
-	const menuItems = (
+  // navbar menu item
+  const menuItems = (
     <>
+      
       <li>
         <Link to="/home">Home</Link>
       </li>
@@ -27,7 +27,7 @@ const Navbar = () => {
     </>
   );
 
-	return (
+  return (
     <div>
       <div className="navbar max-w-7xl mx-auto py-2 px-4">
         <div className="navbar-start">
@@ -52,7 +52,25 @@ const Navbar = () => {
               tabIndex={0}
               className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52 "
             >
+              {user?.uid && (
+                <div className="avatar">
+                  <div className="w-10 ml-3 border rounded-full cursor-pointer">
+                    <img src={user?.photoURL} alt="" />
+                  </div>
+                </div>
+              )}
+
               {menuItems}
+              {user?.uid && (
+                <span>
+                  <button
+                    onClick={logOut}
+                    className="btn btn-primary btn-sm ml-4 mt-1"
+                  >
+                    logout
+                  </button>
+                </span>
+              )}
             </ul>
           </div>
           <Link to="/" className="h-12">
@@ -65,6 +83,7 @@ const Navbar = () => {
         <div className="navbar-end ">
           {user?.uid ? (
             <>
+              <div className="lg:flex hidden">
                 <CustomButton>
                   <span onClick={logOut}>LogOut</span>
                 </CustomButton>
@@ -78,7 +97,28 @@ const Navbar = () => {
                     </div>
                   </div>
                 </div>
-              
+              </div>
+
+              <label
+                htmlFor="my-drawer-2"
+                tabIndex={2}
+                className="btn btn-ghost lg:hidden"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-5 w-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M4 6h16M4 12h8m-8 6h16"
+                  />
+                </svg>
+              </label>
             </>
           ) : (
             <Link to="/login">
@@ -91,4 +131,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default DashboardNavbar;
