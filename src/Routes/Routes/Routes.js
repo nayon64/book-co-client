@@ -2,9 +2,13 @@ import { createBrowserRouter } from "react-router-dom";
 import DashboardLayout from "../../Layout/DashboardLayout/DashboardLayout";
 import Main from "../../Layout/Main/Main";
 import Blogs from "../../Pages/Blogs/Blogs";
+import AddAProduct from "../../Pages/Dashboard/AddAProduct/AddAProduct";
 import AllBuyers from "../../Pages/Dashboard/AllBuyers/AllBuyers";
 import AllSellers from "../../Pages/Dashboard/AllSellers/AllSellers";
 import Dashboard from "../../Pages/Dashboard/Dashboard/Dashboard";
+import MyBuyers from "../../Pages/Dashboard/MyBuyers/MyBuyers";
+import MyProducts from "../../Pages/Dashboard/MyProducts/MyProducts";
+import ReportedItems from "../../Pages/Dashboard/ReportedItems/ReportedItems";
 import Error404 from "../../Pages/Error404/Error404";
 import Home from "../../Pages/Home/Home/Home";
 import Login from "../../Pages/Login/Login";
@@ -66,6 +70,22 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/allbuyers",
         element: <AllBuyers></AllBuyers>,
+      },
+      {
+        path: "/dashboard/reportedItems",
+        element: <ReportedItems></ReportedItems>,
+      },
+      {
+        path: "/dashboard/myProducts",
+        element: <MyProducts></MyProducts>,
+      },
+      {
+        path: "/dashboard/addAProduct",
+        element: <AddAProduct></AddAProduct>,
+      },
+      {
+        path: "/dashboard/myBuyers",
+        element: <MyBuyers></MyBuyers>,
       },
     ],
   },
