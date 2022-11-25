@@ -1,0 +1,19 @@
+[
+  {
+    "category": "Novel",
+    "details": "Classic novel books selection for the very best in unique or custom.",
+    "img": "https://images.unsplash.com/photo-1570676765227-b25aa08d9752?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=464&q=80"
+  },
+  {
+    "category": "Love Story",
+    "details": "Find your romantice love story book. More and more romantice book.",
+    "img": "https://shereads.com/wp-content/uploads/2019/02/Photo-Apr-14-11-39-14.jpg"
+	
+  },
+  {
+    "category": "Science Faction",
+    "details": "All Science faction book lover. Here you find your inportant science fiction book.",
+    "img": "https://images.unsplash.com/photo-1629237213606-4d894c8af292?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=580&q=80"
+  }
+  
+]

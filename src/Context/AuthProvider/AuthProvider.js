@@ -1,7 +1,6 @@
 import React, { createContext, useEffect, useState } from 'react';
 import app from '../../firebase/firebase.config';
 import {createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile} from "firebase/auth"
-import toast from 'react-hot-toast';
 
 const auth= getAuth(app)
 export const AuthContext = createContext()
@@ -43,6 +42,7 @@ const AuthProvider = ({ children }) => {
 		return signInWithPopup(auth, provider);
 	}
 
+	// user Logout 
 	const logOut = () => {
 		setLoading(true);
 		return signOut(auth)
@@ -51,7 +51,7 @@ const AuthProvider = ({ children }) => {
 	const AuthInfo = { user, createUser, updateUserProfile, signInWithProvider, logIn, loading, logOut };
 
 	return <AuthContext.Provider value={AuthInfo}>
-{children}
+		{children}
 	</AuthContext.Provider>;
 };
 
