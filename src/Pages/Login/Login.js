@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import googleImg from "../../assets/image/google.png"
 import { useForm } from "react-hook-form";
@@ -7,23 +7,36 @@ import CustomButton from "../../conponents/CustomButton/CustomButton";
 import { AuthContext } from "../../Context/AuthProvider/AuthProvider";
 import { GoogleAuthProvider } from "firebase/auth";
 import toast from "react-hot-toast";
+import useToken from "../../hooks/useToken/useToken";
 
 const Login = () => {
 	const {register, handleSubmit ,reset} = useForm();
   const [showPassword, setShowPassword] = useState(false);
+  const [loginEmail, setLoginEmail] = useState('')
+  const [token] = useToken(loginEmail)
+  
+
+  const location = useLocation()
+  const navigate=useNavigate()
 
   const googleProvider =new GoogleAuthProvider()
   
-  const {logIn,signInWithProvider}=useContext(AuthContext)
+  const { logIn, signInWithProvider } = useContext(AuthContext)
+  
 
-	const handleEmailAndPasswordLogin = data => {
-    console.log(data)
+  const from = location.state?.from?.pathname || "/";
+
+  if (token) {
+    navigate(from, { replace: true });
+    
+  }
+
+  const handleEmailAndPasswordLogin = data => {
     logIn(data.email, data.password)
       .then(result => {
-        const user = result.user
-        console.log(user)
-        toast.success("Successfully Login")
+        setLoginEmail(result.user.email)
         reset()
+        toast.success("Successfully Login");
       })
       .catch(err => {
       toast.error(err.message)
@@ -32,14 +45,17 @@ const Login = () => {
 
   // google login 
   const handleGoogleLogin = () => {
+
     signInWithProvider(googleProvider)
       .then(result => {
          const user = {
            name: result.user.displayName,
            email: result.user.email,
            role: "Buyer",
-         };
+        };
         
+        
+        // if user are not registered, then user add in database 
         fetch("http://localhost:5000/users", {
           method: "POST",
           headers: {
@@ -49,12 +65,12 @@ const Login = () => {
         })
           .then((res) => res.json())
           .then((data) => {
-            console.log(data);
+            console.log(data)
+            setLoginEmail(result.user.email);
             toast.success("Successfully Login");
           });
       })
       .catch(err => {
-        console.log(err)
         toast.error(err.message);
     })
   }

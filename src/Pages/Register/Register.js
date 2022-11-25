@@ -3,10 +3,11 @@ import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate} from "react-router-dom";
 import googleImg from "../../assets/image/google.png";
 import CustomButton from "../../conponents/CustomButton/CustomButton";
 import { AuthContext } from "../../Context/AuthProvider/AuthProvider";
+import useToken from "../../hooks/useToken/useToken";
 
 const Register = () => {
   const {
@@ -18,6 +19,13 @@ const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmdPassword, setShowConfirmdPassword] = useState(false);
   const [confirmdPasswordError, setConfirmdPasswordError] = useState("");
+  const [loginEmail, setLoginEmail] = useState("");
+  const [token] = useToken(loginEmail);
+  const navigate=useNavigate()
+
+  if (token) {
+    navigate("/")
+  }
 
   const { createUser, updateUserProfile, signInWithProvider } =
     useContext(AuthContext);
@@ -28,7 +36,7 @@ const Register = () => {
 
   // create user with email and password
   const handleUserCreate = (data) => {
-    console.log(data.password, data.confirmdPassword);
+    
     setConfirmdPasswordError("");
 
     //   match password and cofirmd password
@@ -63,8 +71,7 @@ const Register = () => {
                     email: data.email,
                     role: data.role,
                   };
-                  console.log(createUser);
-                  toast.success("SuccessFully User Create");
+                  
                   fetch("http://localhost:5000/users", {
                     method: "POST",
                     headers: {
@@ -73,9 +80,14 @@ const Register = () => {
                     body: JSON.stringify(createUser),
                   })
                     .then((res) => res.json())
-                    .then((data) => {
-                      console.log(data);
-                      reset()
+                    .then((successData) => {
+                      
+                      if (successData.acknowledged) {
+                        toast.success("SuccessFully User Create");
+                        setLoginEmail(data.email);
+                        reset();
+                      } 
+                        
                     });
                 })
                 .catch((err) => {
@@ -113,6 +125,7 @@ const Register = () => {
           .then((res) => res.json())
           .then((data) => {
             console.log(data);
+            setLoginEmail(result.user.email);
           });
         toast.success("Successfully Login");
       })
