@@ -41,14 +41,25 @@ const AddAProduct = () => {
       .then(imgData => {
         console.log(imgData?.data?.display_url)
         if (imgData?.data?.display_url) {
-          data["bookImg"] = imgData?.data?.display_url;
+          // data["bookImg"] = imgData?.data?.display_url;
+          
           const bookInfo = {
-            bookDetails: data,
+            // bookDetails: data,
+            bookName: data.bookName,
+            bookCategory: data.bookCategory,
+            originalPrice: data.originalPrice,
+            sellingPrice: data.sellingPrice,
+            bookUsed: data.bookUsed,
+            bookDescription: data.bookDescription,
+            bookImg: imgData?.data?.display_url,
+            bookCondition: data.bookCondition,
+            sellerPhone: data.sellerPhone,
+            sellerLocation: data.sellerLocation,
             sellerEmail: user.email,
             publishDate: new Date(),
             sellerName: user.displayName,
             sellerVarification: false,
-            isAvailable:true
+            isAvailable: true,
           };
           console.log(bookInfo);
 

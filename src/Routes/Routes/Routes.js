@@ -49,9 +49,8 @@ const router = createBrowserRouter([
             <SingleCategory></SingleCategory>
           </PrivateRoute>
         ),
-        loader: ({ params }) =>
-          fetch(`http://localhost:5000/books/${params.id}`),
-      },
+        loader: ({ params }) => fetch(`http://localhost:5000/singleCategory/${params.id}`),
+      }, 
     ],
   },
   {

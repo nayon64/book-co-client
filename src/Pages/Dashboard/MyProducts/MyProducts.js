@@ -48,12 +48,12 @@ const MyProducts = () => {
                   <td>
                     <div className="avatar">
                       <div className="w-12 rounded-full">
-                        <img src={book.bookDetails.bookImg} alt="" />
+                        <img src={book?.bookImg} alt="" />
                       </div>
                     </div>
                   </td>
-                  <td>{book.bookDetails.bookName}</td>
-                  <td>{book.bookDetails.sellingPrice}</td>
+                  <td>{book?.bookName}</td>
+                  <td>{book?.sellingPrice}</td>
                   <td className='text-center font-bold'>{book.isAvailable? "Availabe":"Sold"}</td>
                   <td className="text-end">
                     <button className="btn sm:btn-sm btn-xs btn-accent text-white rounded">
