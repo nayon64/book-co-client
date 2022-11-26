@@ -1,7 +1,9 @@
 import React from 'react';
 
 const CategoryCart = ({ category }) => {
-	const {category:categoryName,details, img}=category
+  const { category: categoryName, details, img } = category
+  
+  
 	return (
     <div className="card card-side max-h-40 bg-base-100 shadow-xl overflow-hidden">
       <figure className='w-1/2'>

@@ -41,10 +41,8 @@ const AddAProduct = () => {
       .then(imgData => {
         console.log(imgData?.data?.display_url)
         if (imgData?.data?.display_url) {
-          // data["bookImg"] = imgData?.data?.display_url;
           
           const bookInfo = {
-            // bookDetails: data,
             bookName: data.bookName,
             bookCategory: data.bookCategory,
             originalPrice: data.originalPrice,
@@ -61,7 +59,6 @@ const AddAProduct = () => {
             sellerVarification: false,
             isAvailable: true,
           };
-          console.log(bookInfo);
 
           // post book data in database 
           fetch("http://localhost:5000/books", {
@@ -74,7 +71,7 @@ const AddAProduct = () => {
             .then(res => res.json())
             .then(data => {
               if (data.acknowledged) {
-                toast.success("Your data saved in data base");
+                toast.success("Your data saved in database");
                 reset()
                 navigate("/dashboard/myProducts");
               }

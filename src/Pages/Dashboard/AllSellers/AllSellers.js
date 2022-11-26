@@ -22,7 +22,7 @@ const AllSellers = () => {
       <h2 className="text-3xl text-primary font-bold text-center mt-4 md:mt-6 mb-4">
         All Sellers
       </h2>
-      {allSellers && (
+      {allSellers?.length > 0 && (
         <div className="overflow-x-auto mx-4 md:mx-6">
           <table className="table table-compact w-full">
             <thead>
@@ -53,9 +53,8 @@ const AllSellers = () => {
           </table>
         </div>
       )}
-      {!allSellers && (
+      {allSellers?.length === 0 && (
         <h2 className="text-3xl text-accent font-bold text-center my-4">
-          
           No Seller Found
         </h2>
       )}

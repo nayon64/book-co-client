@@ -12,8 +12,8 @@ const Categorys = () => {
 			const data = await res.json()
 			return data
 		}
-	});
-	console.log(categorys)
+  });
+  
 	return (
     <section>
       <h1 className="text-center text-primary font-bold text-4xl">

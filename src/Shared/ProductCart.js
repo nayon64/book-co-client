@@ -3,10 +3,9 @@ import React from 'react';
 import toast from 'react-hot-toast';
 import { FaClock, FaMapMarkerAlt, FaUserEdit } from 'react-icons/fa';
 
-const ProductCart = ({ product,handleProductBooking ,bookingLoading}) => {
+const ProductCart = ({ product,handleProductBooking ,isLoading,refetch}) => {
 	const { bookName, bookImg,sellerName, bookDescription, publishDate ,sellerLocation, bookUsed, sellingPrice,originalPrice,_id} = product;
 	const date = new Date(publishDate);
-	console.log(date)
 	const pdate = format(date, "pp PP")
 	
 	const handleProductReport = (id) => {
@@ -17,7 +16,8 @@ const ProductCart = ({ product,handleProductBooking ,bookingLoading}) => {
 			.then(res => res.json())
 			.then(data => {
 				if (data.modifiedCount > 0) {
-				toast.success("Reported Success fully")
+          toast.success("Reported Success fully")
+          refetch()
 			};
 		})
 	}
@@ -30,7 +30,7 @@ const ProductCart = ({ product,handleProductBooking ,bookingLoading}) => {
         <img src={bookImg} alt="Shoes" className="rounded-xl w-24" />
       </figure>
       <div className="card-body">
-        <h2 className="card-title text-center">{bookName}</h2>
+        <h2 className="card-title text-center text-2xl text-secondary font-bold">{bookName}</h2>
         <div className="flex justify-between items-center">
           <h5 className="font-semibold text-primary text-xl flex items-center">
             <FaUserEdit className="text-secondary mr-1 " /> {sellerName}
@@ -74,7 +74,7 @@ const ProductCart = ({ product,handleProductBooking ,bookingLoading}) => {
           </div>
           <button
             onClick={() => handleProductBooking(_id)}
-            className={`px-2 py-2 bg-primary rounded text-white hover:bg-secondary duration-500 ${bookingLoading && "disabled"}`} 
+            className={`px-2 py-2 bg-primary rounded text-white hover:bg-secondary duration-500 ${isLoading && "disabled"}`} 
           >
             Book Now
           </button>

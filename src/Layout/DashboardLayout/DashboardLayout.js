@@ -11,6 +11,7 @@ const DashboardLayout = () => {
 
   const [isAdmin] = useAdmin(user?.email)
   const [isSeller] = useSeller(user?.email)
+  // const [isBuyer]=useBuyer(user?.email)
   
   
 
@@ -27,6 +28,11 @@ const DashboardLayout = () => {
         <div className="drawer-side">
           <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
           <ul className="menu p-4 w-80 bg-slate-100 text-base-content">
+            {/* {
+              isBuyer && <>
+              <Link></Link>
+              </>
+            } */}
             {isAdmin && (
               <>
                 <li>
