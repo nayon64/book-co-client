@@ -53,7 +53,7 @@ const AllBuyers = () => {
         </div>
       )}
       {!allBuyers && (
-        <h2 className="text-3xl text-primary font-bold text-center my-4">
+        <h2 className="text-3xl text-accent font-bold text-center my-4">
           No Buyer Found
         </h2>
       )}

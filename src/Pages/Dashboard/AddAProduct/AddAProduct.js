@@ -4,11 +4,12 @@ import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import CustomButton from '../../../conponents/CustomButton/CustomButton';
+import Loader from '../../../conponents/Loader/Loader';
 import { AuthContext } from '../../../Context/AuthProvider/AuthProvider';
 
 const AddAProduct = () => {
 
-  const { register, handleSubmit, formState: { errors } } = useForm()
+  const { register, handleSubmit, formState: { errors } ,reset} = useForm()
   const { user } = useContext(AuthContext)
 
   const navigate=useNavigate()
@@ -16,7 +17,7 @@ const AddAProduct = () => {
   const imageHostKey = process.env.REACT_APP_imgbb_API_KEY;
 
 
-  const { data: bookCategorys = [] } = useQuery({
+  const { data: bookCategorys = [] ,isLoading} = useQuery({
     queryKey: ["categoryNames"],
     queryFn: async () => {
       const res = await fetch("http://localhost:5000/categoryNames");
@@ -43,10 +44,11 @@ const AddAProduct = () => {
           data["bookImg"] = imgData?.data?.display_url;
           const bookInfo = {
             bookDetails: data,
-            email: user.email,
+            sellerEmail: user.email,
             publishDate: new Date(),
             sellerName: user.displayName,
             sellerVarification: false,
+            isAvailable:true
           };
           console.log(bookInfo);
 
@@ -62,6 +64,7 @@ const AddAProduct = () => {
             .then(data => {
               if (data.acknowledged) {
                 toast.success("Your data saved in data base");
+                reset()
                 navigate("/dashboard/myProducts");
               }
                 
@@ -70,6 +73,10 @@ const AddAProduct = () => {
     })
 
     
+  }
+
+  if (isLoading) {
+    return <Loader></Loader>
   }
 
 	return (

@@ -54,7 +54,7 @@ const AllSellers = () => {
         </div>
       )}
       {!allSellers && (
-        <h2 className="text-3xl text-primary font-bold text-center my-4">
+        <h2 className="text-3xl text-accent font-bold text-center my-4">
           
           No Seller Found
         </h2>
