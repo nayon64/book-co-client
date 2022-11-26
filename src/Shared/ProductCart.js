@@ -4,7 +4,9 @@ import toast from 'react-hot-toast';
 import { FaClock, FaMapMarkerAlt, FaUserEdit } from 'react-icons/fa';
 
 const ProductCart = ({ product,handleProductBooking ,isLoading,refetch}) => {
-	const { bookName, bookImg,sellerName, bookDescription, publishDate ,sellerLocation, bookUsed, sellingPrice,originalPrice,_id} = product;
+  const { bookName, bookImg, sellerName, bookDescription, publishDate, sellerLocation, bookUsed, sellingPrice, originalPrice, _id } = product;
+  
+
 	const date = new Date(publishDate);
 	const pdate = format(date, "pp PP")
 	
@@ -30,7 +32,9 @@ const ProductCart = ({ product,handleProductBooking ,isLoading,refetch}) => {
         <img src={bookImg} alt="Shoes" className="rounded-xl w-24" />
       </figure>
       <div className="card-body">
-        <h2 className="card-title text-center text-2xl text-secondary font-bold">{bookName}</h2>
+        <h2 className="card-title text-center text-2xl text-secondary font-bold">
+          {bookName}
+        </h2>
         <div className="flex justify-between items-center">
           <h5 className="font-semibold text-primary text-xl flex items-center">
             <FaUserEdit className="text-secondary mr-1 " /> {sellerName}
@@ -44,7 +48,7 @@ const ProductCart = ({ product,handleProductBooking ,isLoading,refetch}) => {
               onClick={() => handleProductReport(_id)}
               className="font-semibold text-primary  text-lg cursor-pointer"
             >
-              Report Product
+              Report To Admin
             </h5>
           )}
         </div>
@@ -67,17 +71,29 @@ const ProductCart = ({ product,handleProductBooking ,isLoading,refetch}) => {
             <span className="text-base font-bold">Used : </span> {bookUsed}
           </p>
         </div>
-        <div className="flex justify-between items-center">
+        <div className="flex justify-between items-center mt-4">
           <div className="font-semibold text-2xl text-accent">
             <span className="text-3xl font-bold">${sellingPrice}</span>
             <span className="line-through ml-2">${originalPrice}</span>
           </div>
-          <button
-            onClick={() => handleProductBooking(_id)}
-            className={`px-2 py-2 bg-primary rounded text-white hover:bg-secondary duration-500 ${isLoading && "disabled"}`} 
-          >
-            Book Now
-          </button>
+          {product?.isAvailable ? (
+            <button
+              onClick={() => handleProductBooking(_id)}
+              className={`px-2 py-2 bg-primary rounded text-white hover:bg-secondary duration-500 ${
+                isLoading && "disabled"
+              }`}
+            >
+              Book Now
+            </button>
+          ) : (
+            <button
+              className={`px-2 py-2 bg-secondary w-16 rounded text-white hover:bg-secondary duration-500 ${
+                isLoading && "disabled"
+              }`}
+            >
+              Sold
+            </button>
+          )}
         </div>
       </div>
     </div>

@@ -42,9 +42,7 @@ const AllBuyers = () => {
                     <button className="btn sm:btn-sm btn-xs btn-accent text-white rounded">
                       Delete
                     </button>
-                    <button className="btn sm:btn-sm btn-xs btn-primary text-white rounded ml-4">
-                      Verify
-                    </button>
+                    
                   </td>
                 </tr>
               ))}

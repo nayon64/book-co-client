@@ -15,7 +15,7 @@ const Categorys = () => {
   });
   
 	return (
-    <section>
+    <section className='md:mt-16 mt-6'>
       <h1 className="text-center text-primary font-bold text-4xl">
         Books Categorys
       </h1>

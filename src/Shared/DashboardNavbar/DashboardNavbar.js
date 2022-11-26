@@ -7,14 +7,8 @@ import { AuthContext } from "../../Context/AuthProvider/AuthProvider";
 const DashboardNavbar = () => {
   const { user, logOut } = useContext(AuthContext);
 
-  // const handleLogOut = () => {
-  //   logOut()
-  // }
-
-  // navbar menu item
   const menuItems = (
     <>
-      
       <li>
         <Link to="/home">Home</Link>
       </li>
@@ -84,9 +78,11 @@ const DashboardNavbar = () => {
           {user?.uid ? (
             <>
               <div className="lg:flex hidden">
-                <CustomButton>
-                  <span onClick={logOut}>LogOut</span>
-                </CustomButton>
+                <div>
+                  <CustomButton>
+                    <span onClick={logOut}>LogOut</span>
+                  </CustomButton>
+                </div>
                 <div
                   className="tooltip tooltip-bottom"
                   data-tip={user.displayName}
