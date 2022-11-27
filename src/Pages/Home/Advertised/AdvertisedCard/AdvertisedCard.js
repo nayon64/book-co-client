@@ -7,7 +7,7 @@ const AdvertisedCard = ({ product }) => {
     <div>
       <div className="hero bg-base-200 rounded-lg">
         <div className="hero-content  flex-col sm:flex-row">
-          <div className="w-full max-h-64 flex justify-center">
+          <div className="w-full max-h-64 md:w-1/2 flex justify-center">
             <img
               src={product?.bookImg}
               className=" w-full object-cover rounded-lg shadow-2xl"

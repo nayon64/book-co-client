@@ -2,11 +2,9 @@ import { format } from 'date-fns';
 import React from 'react';
 import toast from 'react-hot-toast';
 import { FaClock, FaMapMarkerAlt, FaUserEdit } from 'react-icons/fa';
-import BookingModal from '../../conponents/BookingModal/BookingModal';
 
 const ProductCart = ({
   product,
-  isLoading,
   refetch,
   setBookingProduct,
 }) => {
@@ -96,26 +94,14 @@ const ProductCart = ({
             <span className="text-3xl font-bold">${sellingPrice}</span>
             <span className="line-through ml-2">${originalPrice}</span>
           </div>
-          {product?.isAvailable ? (
-            <>
-              <label
-                htmlFor="booking-modal"
-                onClick={() => handleProductBooking(product)}
-                className="px-2 py-2 bg-primary rounded text-white hover:bg-secondary duration-500 cursor-pointer"
-              >
-                Book Now
-              </label>
-              
-            </>
-          ) : (
-            <button
-              className={`px-2 py-2 bg-secondary w-16 rounded text-white hover:bg-secondary duration-500 ${
-                isLoading && "disabled"
-              }`}
-            >
-              Sold
-            </button>
-          )}
+          <label
+            htmlFor="booking-modal"
+            onClick={() => handleProductBooking(product)}
+            className="px-2 py-2 bg-primary rounded text-white hover:bg-secondary duration-500 cursor-pointer"
+          >
+            Book Now
+          </label>
+          
         </div>
       </div>
     </div>

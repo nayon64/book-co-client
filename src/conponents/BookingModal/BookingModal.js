@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import toast from "react-hot-toast";
 import { AuthContext } from "../../Context/AuthProvider/AuthProvider";
-import CustomButton from "../CustomButton/CustomButton";
 
 const BookingModal = ({ bookingProduct ,setBookingProduct,refetch}) => {
 
@@ -22,7 +21,7 @@ const BookingModal = ({ bookingProduct ,setBookingProduct,refetch}) => {
 		delete bookingProduct["_id"]
 		
 
-		fetch("http://localhost:5000/seller/booking", {
+		fetch("http://localhost:5000/bookingItem", {
 			method: "POST",
 			headers: {
 				"content-type":"application/json"

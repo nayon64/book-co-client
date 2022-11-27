@@ -11,7 +11,7 @@ const MyProducts = () => {
 	const { data: myBooks = [],isLoading,refetch } = useQuery({
     queryKey: ["myBooks"],
     queryFn: async () => {
-      const res = await fetch(`http://localhost:5000/myBooks?email=${user?.email}`);
+      const res = await fetch(`http://localhost:5000/seller/myBooks?email=${user?.email}`);
       const data = await res.json();
       return data;
     },
@@ -19,7 +19,7 @@ const MyProducts = () => {
 	
   const handleAdvertised = (id) => {
     
-    fetch(`http://localhost:5000/advertised/${id}`, {
+    fetch(`http://localhost:5000/seller/advertised/${id}`, {
       method:"PUT"
     })
       .then(res => res.json())
@@ -49,7 +49,7 @@ const MyProducts = () => {
                 <th>Image</th>
                 <th>Product Name</th>
                 <th>Price</th>
-                <th className='text-center'>Sales Status</th>
+                <th className="text-center">Sales Status</th>
                 <th></th>
               </tr>
             </thead>
@@ -67,29 +67,26 @@ const MyProducts = () => {
                   </td>
                   <td>{book?.bookName}</td>
                   <td>{book?.sellingPrice}</td>
+                  {/* <td></td> */}
                   <td
                     className={`text-center text-base font-bold ${
-                      book?.isAvailable ? "text-green-700" : "text-rose-700"
+                      book?.isAvailable ? "text-rose-700" : "text-green-700"
                     }`}
                   >
-                    {book?.isAvailable ? "Availabe" : "Sold"}
+                    {book?.isAvailable ? "Sold" : "Availabe"}
                   </td>
                   <td className="text-end">
-                    {book.isAvailable && (
-                      <>
-                        {book?.isAdvertised ? (
-                          <button className="btn sm:btn-sm btn-xs btn-success text-white rounded ">
-                            Advertised
-                          </button>
-                        ) : (
-                          <button
-                            onClick={() => handleAdvertised(book?._id)}
-                            className={`btn sm:btn-sm btn-xs btn-primary text-white rounded ml-4 }`}
-                          >
-                            Advertise
-                          </button>
-                        )}
-                      </>
+                    {book?.isAdvertised ? (
+                      <button className="btn sm:btn-sm btn-xs btn-success text-white rounded ">
+                        Advertised
+                      </button>
+                    ) : (
+                      <button
+                        onClick={() => handleAdvertised(book?._id)}
+                        className={`btn sm:btn-sm btn-xs btn-primary text-white rounded ml-4 }`}
+                      >
+                        Advertise
+                      </button>
                     )}
                     <button className="btn sm:btn-sm ml-4 btn-xs btn-accent text-white rounded">
                       Delete

@@ -1,14 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
-import React, { useState } from "react";
+import React from "react";
+import Loader from "../../../conponents/Loader/Loader";
 import AdvertisedCard from "./AdvertisedCard/AdvertisedCard";
 
 const Advertised = () => {
 
-const [bookingProduct,setBookingProduct]=useState({})
-
   const {
     data: advertisedBookItems = [],
-    refetch,
     isLoading,
   } = useQuery({
     queryKey: ["advertised"],
@@ -19,22 +17,10 @@ const [bookingProduct,setBookingProduct]=useState({})
     },
   });
 
-  const handleProductBooking = (product) => {
-    console.log(product)
-    setBookingProduct(product)
-    // fetch(`http://localhost:5000/bookBooking/${id}`, {
-    //   method: "PUT",
-    // })
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     if (data.modifiedCount > 0) {
-    //       toast.success("Book Booking Successfull");
-    //       refetch();
-    //     }
-    //   });
-  };
-  console.log(bookingProduct)
-
+  if (isLoading) {
+    return <Loader></Loader>
+  }
+  
   return (
     <section className="md:mt-16 mt-6">
       {advertisedBookItems?.length > 0 && (

@@ -56,12 +56,10 @@ const AddAProduct = () => {
             sellerEmail: user.email,
             publishDate: new Date(),
             sellerName: user.displayName,
-            sellerVarification: false,
-            isAvailable: true,
           };
 
           // post book data in database 
-          fetch("http://localhost:5000/books", {
+          fetch("http://localhost:5000/seller/addBookItem", {
             method: "POST",
             headers: {
               "content-type": "application/json",

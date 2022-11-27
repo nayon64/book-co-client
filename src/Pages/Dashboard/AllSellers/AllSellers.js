@@ -4,7 +4,7 @@ import Loader from '../../../conponents/Loader/Loader';
 
 const AllSellers = () => {
 
-	const {data:allSellers=[] ,isLoading} = useQuery({
+	const {data:allSellers=[] ,isLoading,refetch} = useQuery({
 		queryKey: ["sellers"],
 		queryFn: async () => {
 			const res = await fetch("http://localhost:5000/allSellers");
@@ -13,13 +13,15 @@ const AllSellers = () => {
 		}
   })
   
-  const handleSellerVarified = (id) => {
-    console.log(id)
-    fetch(``)
-      .then(res => res.json())
-      .then(data => {
-      console.log(data)
+  const handleSellerVarified = (email) => {
+    fetch(`http://localhost:5000/admin/sellerVarified?email=${email}`, {
+      method:"PUT",
     })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        refetch()
+      });
   }
 
 	if (isLoading) {
@@ -52,12 +54,20 @@ const AllSellers = () => {
                     <button className="btn sm:btn-sm btn-xs btn-accent text-white rounded">
                       Delete
                     </button>
-                    <button
-                      onClick={() => handleSellerVarified(seller._id)}
-                      className="btn sm:btn-sm btn-xs btn-primary text-white rounded ml-4"
-                    >
-                      Verify
-                    </button>
+                    {seller?.sellerVarified ? (
+                      <button
+                        className="btn sm:btn-sm btn-xs btn-success text-white rounded ml-4"
+                      >
+                        Verifed
+                      </button>
+                    ) : (
+                      <button
+                        onClick={() => handleSellerVarified(seller.email)}
+                        className="btn sm:btn-sm btn-xs btn-primary text-white rounded ml-4"
+                      >
+                        Verify
+                      </button>
+                    )}
                   </td>
                 </tr>
               ))}

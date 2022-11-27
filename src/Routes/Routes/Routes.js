@@ -49,7 +49,7 @@ const router = createBrowserRouter([
             <SingleCategory></SingleCategory>
           </PrivateRoute>
         ),
-      }, 
+      },
     ],
   },
   {
@@ -59,31 +59,59 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/dashboard",
-        element: <Dashboard></Dashboard>,
+        element: (
+          <PrivateRoute>
+            <Dashboard></Dashboard>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/dashboard/allsellers",
-        element: <AllSellers></AllSellers>,
+        element: (
+          <PrivateRoute>
+            <AllSellers></AllSellers>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/dashboard/allbuyers",
-        element: <AllBuyers></AllBuyers>,
+        element: (
+          <PrivateRoute>
+            <AllBuyers></AllBuyers>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/dashboard/reportedItems",
-        element: <ReportedItems></ReportedItems>,
+        element: (
+          <PrivateRoute>
+            <ReportedItems></ReportedItems>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/dashboard/myProducts",
-        element: <MyProducts></MyProducts>,
+        element: (
+          <PrivateRoute>
+            <MyProducts></MyProducts>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/dashboard/addAProduct",
-        element: <AddAProduct></AddAProduct>,
+        element: (
+          <PrivateRoute>
+            <AddAProduct></AddAProduct>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/dashboard/myBuyers",
-        element: <MyBuyers></MyBuyers>,
+        element: (
+          <PrivateRoute>
+            <MyBuyers></MyBuyers>
+          </PrivateRoute>
+        ),
       },
     ],
   },

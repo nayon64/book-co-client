@@ -17,7 +17,7 @@ const ReportedItems = () => {
 
   const handleDeleteBookItem = (id) => {
     console.log(id)
-    fetch(`http://localhost:5000/reportedItems/${id}`, {
+    fetch(`http://localhost:5000/admin/reportedItems/${id}`, {
       method:"DELETE"
     })
       .then((res) => res.json())

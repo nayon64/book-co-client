@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import BookingModal from '../../conponents/BookingModal/BookingModal';
+import Loader from '../../conponents/Loader/Loader';
 import ProductCart from './ProductCart';
 
 const SingleCategory = () => {
@@ -19,6 +20,9 @@ const SingleCategory = () => {
     },
   });
 
+  if (isLoading) {
+    return <Loader></Loader>
+  }
 
 	return (
     <div className="max-w-7xl mx-auto">
@@ -29,7 +33,6 @@ const SingleCategory = () => {
               <ProductCart
                 key={i}
                 product={product}
-                isLoading={isLoading}
                 refetch={refetch}
                 setBookingProduct={setBookingProduct}
               ></ProductCart>
