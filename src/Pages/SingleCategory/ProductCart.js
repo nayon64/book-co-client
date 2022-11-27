@@ -2,31 +2,51 @@ import { format } from 'date-fns';
 import React from 'react';
 import toast from 'react-hot-toast';
 import { FaClock, FaMapMarkerAlt, FaUserEdit } from 'react-icons/fa';
+import BookingModal from '../../conponents/BookingModal/BookingModal';
 
-const ProductCart = ({ product,handleProductBooking ,isLoading,refetch}) => {
-  const { bookName, bookImg, sellerName, bookDescription, publishDate, sellerLocation, bookUsed, sellingPrice, originalPrice, _id } = product;
+const ProductCart = ({
+  product,
+  isLoading,
+  refetch,
+  setBookingProduct,
+}) => {
+
   
+  const {
+    bookName,
+    bookImg,
+    sellerName,
+    bookDescription,
+    publishDate,
+    sellerLocation,
+    bookUsed,
+    sellingPrice,
+    originalPrice,
+    _id,
+  } = product;
 
-	const date = new Date(publishDate);
-	const pdate = format(date, "pp PP")
-	
-	const handleProductReport = (id) => {
-		console.log("click",id)
-		fetch(`http://localhost:5000/bookReported/${id}`, {
-			method:"PUT"
-		})
-			.then(res => res.json())
-			.then(data => {
-				if (data.modifiedCount > 0) {
-          toast.success("Reported Success fully")
-          refetch()
-			};
-		})
-	}
-	
+  const date = new Date(publishDate);
+  const pdate = format(date, "pp PP");
 
+  const handleProductReport = (id) => {
+    console.log("click", id);
+    fetch(`http://localhost:5000/bookReported/${id}`, {
+      method: "PUT",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.modifiedCount > 0) {
+          toast.success("Reported Success fully");
+          refetch();
+        }
+      });
+  };
 
-	return (
+  const handleProductBooking = (product) => {
+    setBookingProduct(product);
+  };
+
+  return (
     <div className="card bg-base-100 shadow-xl">
       <figure className="px-5 pt-10">
         <img src={bookImg} alt="Shoes" className="rounded-xl w-24" />
@@ -79,12 +99,13 @@ const ProductCart = ({ product,handleProductBooking ,isLoading,refetch}) => {
           {product?.isAvailable ? (
             <>
               <label
-                htmlFor="my-modal"
+                htmlFor="booking-modal"
                 onClick={() => handleProductBooking(product)}
                 className="px-2 py-2 bg-primary rounded text-white hover:bg-secondary duration-500 cursor-pointer"
               >
-                open modal
+                Book Now
               </label>
+              
             </>
           ) : (
             <button

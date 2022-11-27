@@ -1,8 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import React, { useState } from "react";
-import toast from "react-hot-toast";
-import BookingModal from "../../../conponents/BookingModal/BookingModal";
-import ProductCart from "../../../Shared/ProductCart";
+import AdvertisedCard from "./AdvertisedCard/AdvertisedCard";
 
 const Advertised = () => {
 
@@ -44,22 +42,14 @@ const [bookingProduct,setBookingProduct]=useState({})
           <h1 className="text-center text-primary font-bold text-4xl">
             Advertised Book Items
           </h1>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
+          <div className="grid lg:grid-cols-2 gap-4 p-4">
             {advertisedBookItems.map((product) => (
-              <ProductCart
-                key={product._id}
-                product={product}
-                handleProductBooking={handleProductBooking}
-                refetch={refetch}
-                isLoading={isLoading}
-              ></ProductCart>
+              <AdvertisedCard key={product._id} product={product}></AdvertisedCard>
             ))}
           </div>
         </div>
       )}
-      <BookingModal
-        bookingProduct={bookingProduct}
-      ></BookingModal>
+      
     </section>
   );
 };
