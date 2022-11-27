@@ -77,14 +77,19 @@ const ProductCart = ({ product,handleProductBooking ,isLoading,refetch}) => {
             <span className="line-through ml-2">${originalPrice}</span>
           </div>
           {product?.isAvailable ? (
-            <button
-              onClick={() => handleProductBooking(_id)}
-              className={`px-2 py-2 bg-primary rounded text-white hover:bg-secondary duration-500 ${
-                isLoading && "disabled"
-              }`}
-            >
-              Book Now
-            </button>
+            <>
+              <button
+                onClick={() => handleProductBooking(_id)}
+                className={`px-2 py-2 bg-primary rounded text-white hover:bg-secondary duration-500 ${
+                  isLoading && "disabled"
+                }`}
+              >
+                Book Now
+              </button>
+              <label htmlFor="my-modal" className="btn">
+                open modal
+              </label>
+            </>
           ) : (
             <button
               className={`px-2 py-2 bg-secondary w-16 rounded text-white hover:bg-secondary duration-500 ${

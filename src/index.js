@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import AuthProvider from './Context/AuthProvider/AuthProvider';
 import { Toaster } from 'react-hot-toast';
+import BookingModal from './conponents/BookingModal/BookingModal';
 
 
 const queryClient = new QueryClient();
@@ -17,6 +18,7 @@ root.render(
       <AuthProvider>
         <App />
         <Toaster />
+        
       </AuthProvider>
     </QueryClientProvider>
   </React.StrictMode>
