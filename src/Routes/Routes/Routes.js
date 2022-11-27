@@ -8,6 +8,7 @@ import AllSellers from "../../Pages/Dashboard/AllSellers/AllSellers";
 import Dashboard from "../../Pages/Dashboard/Dashboard/Dashboard";
 import MyBuyers from "../../Pages/Dashboard/MyBuyers/MyBuyers";
 import MyOrders from "../../Pages/Dashboard/MyOrders/MyOrders";
+import Payment from "../../Pages/Dashboard/MyOrders/Payment/Payment.js/Payment";
 import MyProducts from "../../Pages/Dashboard/MyProducts/MyProducts";
 import ReportedItems from "../../Pages/Dashboard/ReportedItems/ReportedItems";
 import Error404 from "../../Pages/Error404/Error404";
@@ -79,6 +80,15 @@ const router = createBrowserRouter([
             <MyOrders></MyOrders>
           </PrivateRoute>
         ),
+      },
+      {
+        path: "/dashboard/myOrders/payment/:id",
+        element: (
+          <PrivateRoute>
+            <Payment></Payment>
+          </PrivateRoute>
+        ),
+        loader: ({ params }) => fetch(`http://localhost:5000/payment/${params.id}`),
       },
       {
         path: "/dashboard/allsellers",
