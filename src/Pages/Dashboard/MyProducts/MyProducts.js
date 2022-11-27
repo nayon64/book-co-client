@@ -49,7 +49,7 @@ const MyProducts = () => {
                 <th>Image</th>
                 <th>Product Name</th>
                 <th>Price</th>
-                <th>Sales Status</th>
+                <th className='text-center'>Sales Status</th>
                 <th></th>
               </tr>
             </thead>
@@ -60,32 +60,40 @@ const MyProducts = () => {
                   <th>{i + 1}</th>
                   <td>
                     <div className="avatar">
-                      <div className="w-12 rounded-full">
+                      <div className="w-12 ">
                         <img src={book?.bookImg} alt="" />
                       </div>
                     </div>
                   </td>
                   <td>{book?.bookName}</td>
                   <td>{book?.sellingPrice}</td>
-                  <td className="text-center font-bold">
-                    {book.isAvailable ? "Availabe" : "Sold"}
+                  <td
+                    className={`text-center text-base font-bold ${
+                      book?.isAvailable ? "text-green-700" : "text-rose-700"
+                    }`}
+                  >
+                    {book?.isAvailable ? "Availabe" : "Sold"}
                   </td>
                   <td className="text-end">
-                    <button className="btn sm:btn-sm btn-xs btn-accent text-white rounded">
+                    {book.isAvailable && (
+                      <>
+                        {book?.isAdvertised ? (
+                          <button className="btn sm:btn-sm btn-xs btn-success text-white rounded ">
+                            Advertised
+                          </button>
+                        ) : (
+                          <button
+                            onClick={() => handleAdvertised(book?._id)}
+                            className={`btn sm:btn-sm btn-xs btn-primary text-white rounded ml-4 }`}
+                          >
+                            Advertise
+                          </button>
+                        )}
+                      </>
+                    )}
+                    <button className="btn sm:btn-sm ml-4 btn-xs btn-accent text-white rounded">
                       Delete
                     </button>
-                    {book?.isAdvertised ? (
-                      <button className="btn sm:btn-sm btn-xs btn-success text-white rounded ml-4">
-                        Advertised
-                      </button>
-                    ) : (
-                      <button
-                        onClick={() => handleAdvertised(book?._id)}
-                        className="btn sm:btn-sm btn-xs btn-primary text-white rounded ml-4"
-                      >
-                        Advertise
-                      </button>
-                    )}
                   </td>
                 </tr>
               ))}

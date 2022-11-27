@@ -11,7 +11,16 @@ const AllSellers = () => {
 			const data = await res.json()
 			return data
 		}
-	})
+  })
+  
+  const handleSellerVarified = (id) => {
+    console.log(id)
+    fetch(``)
+      .then(res => res.json())
+      .then(data => {
+      console.log(data)
+    })
+  }
 
 	if (isLoading) {
 		return <Loader></Loader>
@@ -43,7 +52,10 @@ const AllSellers = () => {
                     <button className="btn sm:btn-sm btn-xs btn-accent text-white rounded">
                       Delete
                     </button>
-                    <button className="btn sm:btn-sm btn-xs btn-primary text-white rounded ml-4">
+                    <button
+                      onClick={() => handleSellerVarified(seller._id)}
+                      className="btn sm:btn-sm btn-xs btn-primary text-white rounded ml-4"
+                    >
                       Verify
                     </button>
                   </td>

@@ -78,15 +78,11 @@ const ProductCart = ({ product,handleProductBooking ,isLoading,refetch}) => {
           </div>
           {product?.isAvailable ? (
             <>
-              <button
-                onClick={() => handleProductBooking(_id)}
-                className={`px-2 py-2 bg-primary rounded text-white hover:bg-secondary duration-500 ${
-                  isLoading && "disabled"
-                }`}
+              <label
+                htmlFor="my-modal"
+                onClick={() => handleProductBooking(product)}
+                className="px-2 py-2 bg-primary rounded text-white hover:bg-secondary duration-500 cursor-pointer"
               >
-                Book Now
-              </button>
-              <label htmlFor="my-modal" className="btn">
                 open modal
               </label>
             </>

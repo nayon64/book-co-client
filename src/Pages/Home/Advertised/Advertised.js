@@ -1,9 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
-import React from "react";
+import React, { useState } from "react";
 import toast from "react-hot-toast";
+import BookingModal from "../../../conponents/BookingModal/BookingModal";
 import ProductCart from "../../../Shared/ProductCart";
 
 const Advertised = () => {
+
+const [bookingProduct,setBookingProduct]=useState({})
+
   const {
     data: advertisedBookItems = [],
     refetch,
@@ -17,31 +21,34 @@ const Advertised = () => {
     },
   });
 
-  const handleProductBooking = (id) => {
-    fetch(`http://localhost:5000/bookBooking/${id}`, {
-      method: "PUT",
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.modifiedCount > 0) {
-          toast.success("Book Booking Successfull");
-          refetch();
-        }
-      });
+  const handleProductBooking = (product) => {
+    console.log(product)
+    setBookingProduct(product)
+    // fetch(`http://localhost:5000/bookBooking/${id}`, {
+    //   method: "PUT",
+    // })
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     if (data.modifiedCount > 0) {
+    //       toast.success("Book Booking Successfull");
+    //       refetch();
+    //     }
+    //   });
   };
+  console.log(bookingProduct)
 
   return (
     <section className="md:mt-16 mt-6">
-      {advertisedBookItems?.length>0 && (
+      {advertisedBookItems?.length > 0 && (
         <div>
           <h1 className="text-center text-primary font-bold text-4xl">
             Advertised Book Items
           </h1>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
-            {advertisedBookItems.map((book) => (
+            {advertisedBookItems.map((product) => (
               <ProductCart
-                key={book._id}
-                product={book}
+                key={product._id}
+                product={product}
                 handleProductBooking={handleProductBooking}
                 refetch={refetch}
                 isLoading={isLoading}
@@ -50,6 +57,9 @@ const Advertised = () => {
           </div>
         </div>
       )}
+      <BookingModal
+        bookingProduct={bookingProduct}
+      ></BookingModal>
     </section>
   );
 };

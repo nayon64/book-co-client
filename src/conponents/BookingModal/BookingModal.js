@@ -1,13 +1,29 @@
 import React from 'react';
+import toast from 'react-hot-toast';
 
-const BookingModal = () => {
-	return (
+const BookingModal = ({ bookingProduct }) => {
+	console.log(bookingProduct);
+	
+
+  const handleConfirmd = () => {
+    console.log(bookingProduct?._id)
+    fetch(`http://localhost:5000/bookBooking/${bookingProduct?._id}`, {
+      method: "PUT",
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data.modifiedCount) {
+          console.log(data);
+          toast.success("Booking Successfull!!!")
+        }
+          
+      })
+    
+  }
+
+
+  return (
     <div>
-      {/* The button to open modal */}
-      <label htmlFor="my-modal" className="btn">
-        open modal
-      </label>
-
       {/* Put this part before </body> tag */}
       <input type="checkbox" id="my-modal" className="modal-toggle" />
       <div className="modal">
@@ -20,7 +36,7 @@ const BookingModal = () => {
             use Wikipedia for free!
           </p>
           <div className="modal-action">
-            <label htmlFor="my-modal" className="btn">
+            <label onClick={handleConfirmd} htmlFor="my-modal" className="btn">
               Yay!
             </label>
           </div>
