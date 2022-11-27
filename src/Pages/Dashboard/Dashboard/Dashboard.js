@@ -15,7 +15,7 @@ const Dashboard = () => {
     <div className='flex justify-center items-center h-full'>
       <div className='text-center'>
 				<h1 className='text-6xl font-bold text-Primary'>WELLCOME TO</h1>
-				<h1 className='text-6xl font-bold text-Primary'><span className='text-accent'>{isAdmin && "ADMIN"}{isSeller && "SELLER"}</span> DASHBOARD</h1>
+				<h1 className='text-6xl font-bold text-Primary'><span className='text-accent'>{isAdmin && "ADMIN"}{isSeller && "SELLER"} {isAdmin || isSeller || "BUYER"}</span> DASHBOARD</h1>
       </div>
     </div>
   );

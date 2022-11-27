@@ -7,6 +7,7 @@ import AllBuyers from "../../Pages/Dashboard/AllBuyers/AllBuyers";
 import AllSellers from "../../Pages/Dashboard/AllSellers/AllSellers";
 import Dashboard from "../../Pages/Dashboard/Dashboard/Dashboard";
 import MyBuyers from "../../Pages/Dashboard/MyBuyers/MyBuyers";
+import MyOrders from "../../Pages/Dashboard/MyOrders/MyOrders";
 import MyProducts from "../../Pages/Dashboard/MyProducts/MyProducts";
 import ReportedItems from "../../Pages/Dashboard/ReportedItems/ReportedItems";
 import Error404 from "../../Pages/Error404/Error404";
@@ -14,7 +15,9 @@ import Home from "../../Pages/Home/Home/Home";
 import Login from "../../Pages/Login/Login";
 import Register from "../../Pages/Register/Register";
 import SingleCategory from "../../Pages/SingleCategory/SingleCategory";
+import AdminRoute from "../AdminRoute/AdminRoute";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
+import SellerRoute from "../SellerRoute/SellerRoute";
 
 const router = createBrowserRouter([
   {
@@ -55,7 +58,11 @@ const router = createBrowserRouter([
   {
     path: "/dashboard",
     errorElement: <Error404></Error404>,
-    element: <DashboardLayout></DashboardLayout>,
+    element: (
+      <PrivateRoute>
+        <DashboardLayout></DashboardLayout>
+      </PrivateRoute>
+    ),
     children: [
       {
         path: "/dashboard",
@@ -66,51 +73,59 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/dashboard/allsellers",
+        path: "/dashboard/myOrders",
         element: (
           <PrivateRoute>
-            <AllSellers></AllSellers>
+            <MyOrders></MyOrders>
           </PrivateRoute>
+        ),
+      },
+      {
+        path: "/dashboard/allsellers",
+        element: (
+          <AdminRoute>
+            <AllSellers></AllSellers>
+          </AdminRoute>
         ),
       },
       {
         path: "/dashboard/allbuyers",
         element: (
-          <PrivateRoute>
+          <AdminRoute>
             <AllBuyers></AllBuyers>
-          </PrivateRoute>
+          </AdminRoute>
         ),
       },
       {
         path: "/dashboard/reportedItems",
         element: (
-          <PrivateRoute>
+          <AdminRoute>
             <ReportedItems></ReportedItems>
-          </PrivateRoute>
+          </AdminRoute>
         ),
       },
       {
         path: "/dashboard/myProducts",
         element: (
-          <PrivateRoute>
+          <SellerRoute>
             <MyProducts></MyProducts>
-          </PrivateRoute>
+          </SellerRoute>
         ),
       },
       {
         path: "/dashboard/addAProduct",
         element: (
-          <PrivateRoute>
+          <SellerRoute>
             <AddAProduct></AddAProduct>
-          </PrivateRoute>
+          </SellerRoute>
         ),
       },
       {
         path: "/dashboard/myBuyers",
         element: (
-          <PrivateRoute>
+          <SellerRoute>
             <MyBuyers></MyBuyers>
-          </PrivateRoute>
+          </SellerRoute>
         ),
       },
     ],
