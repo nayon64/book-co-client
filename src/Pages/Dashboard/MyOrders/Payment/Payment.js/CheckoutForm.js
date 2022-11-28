@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
-import SmallLoader from "../../../../../conponents/Loader/SmallLoader";
+import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import SmallLoader from "../../../../../conponents/Loader/SmallLoader";
 
 const CheckoutForm = ({ bookingBook }) => {
   const [cardError, setCardError] = useState("");
@@ -21,7 +21,7 @@ const CheckoutForm = ({ bookingBook }) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        authraization: `Bearer ${localStorage.getItem("accessToken")}`,
+        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },
       body: JSON.stringify({ price }),
     })

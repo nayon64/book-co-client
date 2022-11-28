@@ -8,7 +8,11 @@ const ReportedItems = () => {
   const { data: reportedItems = [], isLoading,refetch } = useQuery({
     queryKey: ["reportedItems"],
     queryFn: async () => {
-      const res = await fetch("http://localhost:5000/reportedItems");
+      const res = await fetch("http://localhost:5000/reportedItems", {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      });
       const data = await res.json();
       return data;
     },
@@ -18,7 +22,10 @@ const ReportedItems = () => {
   const handleDeleteBookItem = (id) => {
     console.log(id)
     fetch(`http://localhost:5000/admin/reportedItems/${id}`, {
-      method:"DELETE"
+      method: "DELETE",
+      headers: {
+            authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          },
     })
       .then((res) => res.json())
       .then((data) => {

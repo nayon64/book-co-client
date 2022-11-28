@@ -39,7 +39,7 @@ const Register = () => {
 
   // create user with email and password
   const handleUserCreate = (data) => {
-    setRegisterLoading(false);
+    setRegisterLoading(true);
     setConfirmdPasswordError("");
 
     //   match password and cofirmd password

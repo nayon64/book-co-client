@@ -23,7 +23,11 @@ const AddAProduct = () => {
   const { data: bookCategorys = [] , isLoading} = useQuery({
     queryKey: ["categoryNames"],
     queryFn: async () => {
-      const res = await fetch("http://localhost:5000/categoryNames");
+      const res = await fetch("http://localhost:5000/categoryNames", {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      });
       const data = res.json();
       return data;
     },
@@ -67,19 +71,19 @@ const AddAProduct = () => {
             method: "POST",
             headers: {
               "content-type": "application/json",
+              authorization: `Bearer ${localStorage.getItem("accessToken")}`,
             },
             body: JSON.stringify(bookInfo),
           })
-            .then(res => res.json())
-            .then(data => {
+            .then((res) => res.json())
+            .then((data) => {
               if (data.acknowledged) {
-                setAddLoading(false)
+                setAddLoading(false);
                 toast.success("Your data saved in database");
-                reset()
+                reset();
                 navigate("/dashboard/myProducts");
               }
-                
-          })
+            });
         }
     })
 

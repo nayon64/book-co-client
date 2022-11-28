@@ -2,10 +2,10 @@ import { format } from 'date-fns';
 import React, { useContext, useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { FaClock, FaMapMarkerAlt, FaUserEdit } from 'react-icons/fa';
+import checkMark from "../../assets/image/check-mark.png";
 import { AuthContext } from '../../Context/AuthProvider/AuthProvider';
 import useAdmin from '../../hooks/useAdmin/useAdmin';
 import useSeller from '../../hooks/useSeller/useSeller';
-import checkMark from "../../assets/image/check-mark.png"
 
 const ProductCart = ({
   product,
@@ -37,12 +37,12 @@ const ProductCart = ({
 
   useEffect(() => {
     fetch(
-      `http://localhost:5000/seller/verifySeller?email=${product?.sellerEmail}`
+      `http://localhost:5000/seller/verifySeller?email=${product?.sellerEmail}`,
     )
-      .then(res => res.json())
-      .then(data => {
-      setSellerVarify(data.isVarify);
-    })
+      .then((res) => res.json())
+      .then((data) => {
+        setSellerVarify(data.isVarify);
+      });
   }, [product?.sellerEmail]);
 
   console.log(sellerVarify)
@@ -54,6 +54,9 @@ const ProductCart = ({
     console.log("click", id);
     fetch(`http://localhost:5000/bookReported/${id}`, {
       method: "PUT",
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
     })
       .then((res) => res.json())
       .then((data) => {

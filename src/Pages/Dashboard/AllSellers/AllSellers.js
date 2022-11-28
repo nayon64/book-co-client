@@ -8,7 +8,11 @@ const AllSellers = () => {
 	const {data:allSellers=[] ,isLoading,refetch} = useQuery({
 		queryKey: ["sellers"],
 		queryFn: async () => {
-			const res = await fetch("http://localhost:5000/allSellers");
+      const res = await fetch("http://localhost:5000/allSellers", {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      });
 			const data = await res.json()
 			return data
 		}
@@ -16,25 +20,31 @@ const AllSellers = () => {
   
   const handleSellerVarified = (email) => {
     fetch(`http://localhost:5000/admin/sellerVarified?email=${email}`, {
-      method:"PUT",
+      method: "PUT",
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
     })
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
-        refetch()
+        refetch();
       });
   }
 
   const handleDeleteSeller = id => {
     console.log(id)
     fetch(`http://localhost:5000/admin/deleteUser/${id}`, {
-      method:"PUT",
+      method: "PUT",
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
     })
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
-        toast.success("Successfully Seller Deleted!!!")
-        refetch()
+        toast.success("Successfully Seller Deleted!!!");
+        refetch();
       });
   }
   

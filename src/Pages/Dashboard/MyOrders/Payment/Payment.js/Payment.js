@@ -15,8 +15,9 @@ const Payment = () => {
 	if (navigation.state === "loading") {
     return <Loader></Loader>
   }
-  console.log(bookingBook)
-  console.log(stripePromise)
+    
+
+  
 	return (
     <div className="max-w-96 ">
       <div className="sm:w-2/3 md:w-1/2 block border border-primary rounded-lg p-4 mx-auto">

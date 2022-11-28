@@ -11,7 +11,14 @@ const MyProducts = () => {
 	const { data: myBooks = [],isLoading,refetch } = useQuery({
     queryKey: ["myBooks"],
     queryFn: async () => {
-      const res = await fetch(`http://localhost:5000/seller/myBooks?email=${user?.email}`);
+      const res = await fetch(
+        `http://localhost:5000/seller/myBooks?email=${user?.email}`,
+        {
+          headers: {
+            authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          },
+        }
+      );
       const data = await res.json();
       return data;
     },
@@ -20,7 +27,10 @@ const MyProducts = () => {
   const handleAdvertised = (id) => {
     
     fetch(`http://localhost:5000/seller/advertised/${id}`, {
-      method:"PUT"
+      method: "PUT",
+      headers: {
+            authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          },
     })
       .then(res => res.json())
       .then(data => {

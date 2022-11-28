@@ -14,7 +14,11 @@ const SingleCategory = () => {
   const { data: products = [],isLoading ,refetch} = useQuery({
     queryKey: ["singleCategory"],
     queryFn: async () => {
-      const res = await fetch(`http://localhost:5000/singleCategory/${id}`);
+      const res = await fetch(`http://localhost:5000/singleCategory/${id}`, {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      });
       const data = await res.json();
       return data;
     },
