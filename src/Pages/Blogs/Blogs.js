@@ -1,10 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
+import Loader from '../../conponents/Loader/Loader';
 import BlogCart from './BlogCart';
 
 const Blogs = () => {
 
-	const {data:blogs=[] } = useQuery({
+	const {data:blogs=[],isLoading } = useQuery({
 		queryKey: ["blogs"],
 		queryFn: async() => {
 			const res = await fetch(`http://localhost:5000/blogs`);
@@ -13,7 +14,12 @@ const Blogs = () => {
 		}
 		
 	})
-	console.log(blogs)
+	
+  if (isLoading) {
+    return <Loader></Loader>
+  }
+
+  
 	return (
     <div className='max-w-7xl mx-auto mt-6'>
       <h1 className='text-center text-3xl font-bold text-primary'>Our Recents Blogs</h1>

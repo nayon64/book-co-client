@@ -3,15 +3,17 @@ import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { Link, useNavigate} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import googleImg from "../../assets/image/google.png";
 import CustomButton from "../../conponents/CustomButton/CustomButton";
+import SmallLoader from "../../conponents/Loader/SmallLoader";
 import { AuthContext } from "../../Context/AuthProvider/AuthProvider";
 import useToken from "../../hooks/useToken/useToken";
 
 const Register = () => {
   const {
-    register,reset,
+    register,
+    reset,
     handleSubmit,
     formState: { errors },
   } = useForm();
@@ -20,23 +22,24 @@ const Register = () => {
   const [showConfirmdPassword, setShowConfirmdPassword] = useState(false);
   const [confirmdPasswordError, setConfirmdPasswordError] = useState("");
   const [loginEmail, setLoginEmail] = useState("");
+  const [registerLoading, setRegisterLoading] = useState(false);
   const [token] = useToken(loginEmail);
-  const navigate=useNavigate()
+  const navigate = useNavigate();
 
   if (token) {
-    navigate("/")
+    navigate("/");
   }
 
   const { createUser, updateUserProfile, signInWithProvider } =
     useContext(AuthContext);
-  
+
   const googleProvider = new GoogleAuthProvider();
 
   const imageHostKey = process.env.REACT_APP_imgbb_API_KEY;
 
   // create user with email and password
   const handleUserCreate = (data) => {
-    
+    setRegisterLoading(false);
     setConfirmdPasswordError("");
 
     //   match password and cofirmd password
@@ -71,7 +74,7 @@ const Register = () => {
                     email: data.email,
                     role: data.role,
                   };
-                  
+
                   fetch("http://localhost:5000/users", {
                     method: "POST",
                     headers: {
@@ -81,13 +84,12 @@ const Register = () => {
                   })
                     .then((res) => res.json())
                     .then((successData) => {
-                      
                       if (successData.acknowledged) {
+                        setRegisterLoading(false);
                         toast.success("SuccessFully User Create");
                         setLoginEmail(data.email);
                         reset();
-                      } 
-                        
+                      }
                     });
                 })
                 .catch((err) => {
@@ -100,7 +102,6 @@ const Register = () => {
             });
         }
       });
-
   };
 
   // handle google login
@@ -305,13 +306,17 @@ const Register = () => {
             </div>
 
             <div className="form-control">
-              <CustomButton>
-                <input
-                  className="w-full h-full cursor-pointer"
-                  type="submit"
-                  value="Rgister"
-                />
-              </CustomButton>
+              {registerLoading ? (
+                <SmallLoader></SmallLoader>
+              ) : (
+                <CustomButton>
+                  <input
+                    className="w-full h-full cursor-pointer"
+                    type="submit"
+                    value="Rgister"
+                  />
+                </CustomButton>
+              )}
             </div>
           </form>
           <p>

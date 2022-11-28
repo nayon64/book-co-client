@@ -54,12 +54,12 @@ const MyOrders = () => {
                   <td>{myOrder.bookName}</td>
                   <td>{myOrder.sellingPrice}</td>
                   <td className="text-end">
-                    <Link
+                    {myOrder.paid?<h3 className='text-green-600 text-xl font-bold'>Paid</h3>:<Link
                       to={`/dashboard/myOrders/payment/${myOrder._id}`}
                       className="btn sm:btn-md btn-xs btn-primary text-white rounded"
                     >
                       Pay
-                    </Link>
+                    </Link>}
                   </td>
                 </tr>
               ))}

@@ -1,61 +1,60 @@
 import React, { useContext, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import googleImg from "../../assets/image/google.png"
+import googleImg from "../../assets/image/google.png";
 import { useForm } from "react-hook-form";
 import CustomButton from "../../conponents/CustomButton/CustomButton";
 import { AuthContext } from "../../Context/AuthProvider/AuthProvider";
 import { GoogleAuthProvider } from "firebase/auth";
 import toast from "react-hot-toast";
 import useToken from "../../hooks/useToken/useToken";
+import SmallLoader from "../../conponents/Loader/SmallLoader";
 
 const Login = () => {
-	const {register, handleSubmit ,reset} = useForm();
+  const { register, handleSubmit, reset } = useForm();
   const [showPassword, setShowPassword] = useState(false);
-  const [loginEmail, setLoginEmail] = useState('')
-  const [token] = useToken(loginEmail)
-  
+  const [loginEmail, setLoginEmail] = useState("");
+  const [loginLoading, setLoginLoading] = useState(false);
+  const [token] = useToken(loginEmail);
 
-  const location = useLocation()
-  const navigate=useNavigate()
+  const location = useLocation();
+  const navigate = useNavigate();
 
-  const googleProvider =new GoogleAuthProvider()
-  
-  const { logIn, signInWithProvider } = useContext(AuthContext)
-  
+  const googleProvider = new GoogleAuthProvider();
+
+  const { logIn, signInWithProvider } = useContext(AuthContext);
 
   const from = location.state?.from?.pathname || "/";
 
   if (token) {
     navigate(from, { replace: true });
-    
   }
 
-  const handleEmailAndPasswordLogin = data => {
+  const handleEmailAndPasswordLogin = (data) => {
+    setLoginLoading(true);
     logIn(data.email, data.password)
-      .then(result => {
-        setLoginEmail(result.user.email)
-        reset()
+      .then((result) => {
+        setLoginEmail(result.user.email);
+        reset();
         toast.success("Successfully Login");
+        setLoginLoading(false);
       })
-      .catch(err => {
-      toast.error(err.message)
-    })
-  }
+      .catch((err) => {
+        toast.error(err.message);
+      });
+  };
 
-  // google login 
+  // google login
   const handleGoogleLogin = () => {
-
     signInWithProvider(googleProvider)
-      .then(result => {
-         const user = {
-           name: result.user.displayName,
-           email: result.user.email,
-           role: "Buyer",
+      .then((result) => {
+        const user = {
+          name: result.user.displayName,
+          email: result.user.email,
+          role: "Buyer",
         };
-        
-        
-        // if user are not registered, then user add in database 
+
+        // if user are not registered, then user add in database
         fetch("http://localhost:5000/users", {
           method: "POST",
           headers: {
@@ -65,18 +64,16 @@ const Login = () => {
         })
           .then((res) => res.json())
           .then((data) => {
-            console.log(data)
+            console.log(data);
             setLoginEmail(result.user.email);
             toast.success("Successfully Login");
           });
       })
-      .catch(err => {
+      .catch((err) => {
         toast.error(err.message);
-    })
-  }
+      });
+  };
 
-	
-	
   return (
     <div>
       <div className="card flex-shrink-0 mx-auto w-96 shadow-2xl bg-base-100">
@@ -131,17 +128,20 @@ const Login = () => {
 
             <div className="form-control">
               <CustomButton>
-                <input
-                  className="w-full h-full cursor-pointer"
-                  type="submit"
-                  value="Login"
-                />
+                {loginLoading ? (
+                  <SmallLoader></SmallLoader>
+                ) : (
+                  <input
+                    className="w-full h-full cursor-pointer"
+                    type="submit"
+                    value="Login"
+                  />
+                )}
               </CustomButton>
-              {/* <button className="btn btn-primary">Login</button> */}
             </div>
           </form>
           <p>
-            Create an account?{" "}
+            Create an account?
             <Link className="font-semibold text-primary" to="/register">
               Register
             </Link>

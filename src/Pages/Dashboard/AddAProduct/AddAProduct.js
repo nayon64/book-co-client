@@ -1,10 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import CustomButton from '../../../conponents/CustomButton/CustomButton';
 import Loader from '../../../conponents/Loader/Loader';
+import SmallLoader from '../../../conponents/Loader/SmallLoader';
 import { AuthContext } from '../../../Context/AuthProvider/AuthProvider';
 
 const AddAProduct = () => {
@@ -12,12 +13,14 @@ const AddAProduct = () => {
   const { register, handleSubmit, formState: { errors } ,reset} = useForm()
   const { user } = useContext(AuthContext)
 
+  const [addLoading,setAddLoading]=useState(false)
+
   const navigate=useNavigate()
   
   const imageHostKey = process.env.REACT_APP_imgbb_API_KEY;
 
 
-  const { data: bookCategorys = [] ,isLoading} = useQuery({
+  const { data: bookCategorys = [] , isLoading} = useQuery({
     queryKey: ["categoryNames"],
     queryFn: async () => {
       const res = await fetch("http://localhost:5000/categoryNames");
@@ -27,6 +30,7 @@ const AddAProduct = () => {
   });
 
   const handleAddProduct = data => {
+    setAddLoading(true)
 
     const image = data.bookImg[0];
     const formData = new FormData();
@@ -69,6 +73,7 @@ const AddAProduct = () => {
             .then(res => res.json())
             .then(data => {
               if (data.acknowledged) {
+                setAddLoading(false)
                 toast.success("Your data saved in database");
                 reset()
                 navigate("/dashboard/myProducts");
@@ -80,6 +85,7 @@ const AddAProduct = () => {
 
     
   }
+  console.log(errors)
 
   if (isLoading) {
     return <Loader></Loader>
@@ -123,10 +129,10 @@ const AddAProduct = () => {
               </span>
             </label>
             <select
-              {...register("bookCategory", {
-                required: "Please select your book category.",
+              {...register("bookCategory",{
+                required:"Please select your book category",
               })}
-              className="select select-bordered max-w-sm"
+              className="select select-bordered w-full"
             >
               {bookCategorys.map((bookCategory) => (
                 <option key={bookCategory._id} value={bookCategory.category}>
@@ -273,9 +279,9 @@ const AddAProduct = () => {
             </label>
             <select
               {...register("bookCondition", {
-                required: "Please select your book conditon.",
+                required:"Please select your book conditon.",
               })}
-              className="select select-bordered max-w-sm"
+              className="select select-bordered"
             >
               <option value={"Excellent"}>Excellent</option>
               <option value={"Good"}>Good</option>
@@ -350,11 +356,15 @@ const AddAProduct = () => {
         </div>
         <div className="block">
           <CustomButton>
-            <input
-              className="w-full h-full cursor-pointer"
-              type="submit"
-              value="Publish"
-            />
+            {addLoading ? (
+              <SmallLoader></SmallLoader>
+            ) : (
+              <input
+                className="w-full h-full cursor-pointer"
+                type="submit"
+                value="Publish"
+              />
+            )}
           </CustomButton>
         </div>
       </form>

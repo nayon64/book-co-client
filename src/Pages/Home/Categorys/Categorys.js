@@ -1,11 +1,12 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Loader from '../../../conponents/Loader/Loader';
 import CategoryCart from './CategoryCart';
 
 const Categorys = () => {
 
-	const {data:categorys=[]} = useQuery({
+	const {data:categorys=[], isLoading} = useQuery({
 		queryKey: ["categorys"],
 		queryFn: async () => {
 			const res = await fetch(`http://localhost:5000/categorys`);
@@ -14,6 +15,10 @@ const Categorys = () => {
 		}
   });
   
+  if (isLoading) {
+    return <Loader></Loader>
+  }
+
 	return (
     <section className='md:mt-16 mt-6'>
       <h1 className="text-center text-primary font-bold text-4xl divider">
