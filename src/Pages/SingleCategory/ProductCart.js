@@ -1,7 +1,10 @@
 import { format } from 'date-fns';
-import React from 'react';
+import React, { useContext } from 'react';
 import toast from 'react-hot-toast';
 import { FaClock, FaMapMarkerAlt, FaUserEdit } from 'react-icons/fa';
+import { AuthContext } from '../../Context/AuthProvider/AuthProvider';
+import useAdmin from '../../hooks/useAdmin/useAdmin';
+import useSeller from '../../hooks/useSeller/useSeller';
 
 const ProductCart = ({
   product,
@@ -22,6 +25,10 @@ const ProductCart = ({
     originalPrice,
     _id,
   } = product;
+
+  const { user } = useContext(AuthContext);
+  const [isAdmin] = useAdmin(user?.email);
+  const [isSeller] = useSeller(user?.email);
 
   const date = new Date(publishDate);
   const pdate = format(date, "pp PP");
@@ -94,14 +101,19 @@ const ProductCart = ({
             <span className="text-3xl font-bold">${sellingPrice}</span>
             <span className="line-through ml-2">${originalPrice}</span>
           </div>
-          <label
-            htmlFor="booking-modal"
-            onClick={() => handleProductBooking(product)}
-            className="px-2 py-2 bg-primary rounded text-white hover:bg-secondary duration-500 cursor-pointer"
-          >
-            Book Now
-          </label>
-          
+          {!isAdmin && !isSeller ? (
+            <label
+              htmlFor="booking-modal"
+              onClick={() => handleProductBooking(product)}
+              className="px-2 py-2 bg-primary rounded text-white hover:bg-secondary duration-500 cursor-pointer"
+            >
+              Book Now
+            </label>
+          ) : (
+            <div>
+              <h3 className="font-bold text-red-500">Do Not Book</h3>
+            </div>
+          )}
         </div>
       </div>
     </div>

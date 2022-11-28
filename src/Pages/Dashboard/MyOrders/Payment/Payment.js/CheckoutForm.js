@@ -9,8 +9,8 @@ const CheckoutForm = ({ bookingBook }) => {
   const [paymentLoading, setPaymentLoading] = useState(false);
   const [transactionId, setTransactionId] = useState("");
   const [clientSecret, setClientSecret] = useState("");
-  const { sellingPrice: price, buyerEmail, buyerName ,_id} = bookingBook;
-  console.log(price);
+	const { sellingPrice: price, buyerEmail, buyerName, _id } = bookingBook;
+	console.log(bookingBook)
 
   const stripe = useStripe();
   const elements = useElements();
@@ -97,10 +97,9 @@ const CheckoutForm = ({ bookingBook }) => {
         .then((data) => {
           console.log(data);
           if (data.insertedId) {
-			  setSuccess("congratulation!! Your Payment Successfull");
-			  toast.success("Payment Successfull!!")
+            setSuccess("congratulation!! Your Payment Successfull");
+            toast.success("Payment Successfull!!");
             setTransactionId(paymentIntent.id);
-            console.log(paymentIntent);
           }
         });
     }
@@ -129,12 +128,12 @@ const CheckoutForm = ({ bookingBook }) => {
         />
 
         {
-          <div className="w-24 text-center py-1 bg-primary rounded mt-4">
+          <div className="w-24 text-center  bg-primary rounded mt-4">
             {paymentLoading ? (
               <SmallLoader></SmallLoader>
             ) : (
               <button
-                className=" hover:bg-secondary duration-500 font-semibold text-white "
+                className=" hover:bg-secondary duration-500 font-semibold text-white w-full h-full py-1 rounded"
                 type="submit"
                 disabled={!stripe && !clientSecret}
               >
@@ -149,8 +148,8 @@ const CheckoutForm = ({ bookingBook }) => {
         <div className="mt-6">
           <p className="text-green-600 font-semibold text-sm">{success}</p>
           <p className="text-primary font-semibold text-sm">
-            Your Transaction Id:
-            <span className="text-bold text-secondary text-base">
+            Your Transaction Id : 
+            <span className="text-bold text-secondary ml-2 text-base">
               {transactionId}
             </span>
           </p>

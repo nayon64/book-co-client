@@ -94,11 +94,13 @@ const Register = () => {
                 })
                 .catch((err) => {
                   toast.error(err.message);
+                  setRegisterLoading(false);
                 });
             })
             .catch((err) => {
               console.log(err);
               toast.error(err.message);
+              setRegisterLoading(false);
             });
         }
       });

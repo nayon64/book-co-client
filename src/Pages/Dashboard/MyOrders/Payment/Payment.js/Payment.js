@@ -19,14 +19,20 @@ const Payment = () => {
   console.log(stripePromise)
 	return (
     <div className="max-w-96 ">
-      <div className="w-96 block border border-primary rounded-lg p-4 mx-auto">
-        <h3>
-          Payment for <span>{bookingBook?.bookName}</span>
+      <div className="sm:w-2/3 md:w-1/2 block border border-primary rounded-lg p-4 mx-auto">
+        <h2 className="text-2xl font-bold text-Primary text-center uppercase mb-3">
+          CheckOut
+        </h2>
+        <h3 className="text-xl font-semibold text-secondary">
+          Payment for{" "}
+          <span className="text-primary font-bold ">
+            {bookingBook?.bookName}
+          </span>
         </h3>
-        <h4>
+        <h2 className="text-2xl font-bold text-accent">
           Payment : <span>${bookingBook?.sellingPrice} USD</span>
-        </h4>
-        <div className="mt-6 w-80">
+        </h2>
+        <div className="mt-6 96">
           <Elements stripe={stripePromise}>
             <CheckoutForm bookingBook={bookingBook}></CheckoutForm>
           </Elements>
