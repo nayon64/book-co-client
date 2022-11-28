@@ -17,6 +17,7 @@ import Login from "../../Pages/Login/Login";
 import Register from "../../Pages/Register/Register";
 import SingleCategory from "../../Pages/SingleCategory/SingleCategory";
 import AdminRoute from "../AdminRoute/AdminRoute";
+import BuyerRoute from "../BuyerRoute/BuyerRoute";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import SellerRoute from "../SellerRoute/SellerRoute";
 
@@ -76,19 +77,20 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/myOrders",
         element: (
-          <PrivateRoute>
+          <BuyerRoute>
             <MyOrders></MyOrders>
-          </PrivateRoute>
+          </BuyerRoute>
         ),
       },
       {
         path: "/dashboard/myOrders/payment/:id",
         element: (
-          <PrivateRoute>
+          <BuyerRoute>
             <Payment></Payment>
-          </PrivateRoute>
+          </BuyerRoute>
         ),
-        loader: ({ params }) => fetch(`http://localhost:5000/payment/${params.id}`),
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/payment/${params.id}`),
       },
       {
         path: "/dashboard/allsellers",

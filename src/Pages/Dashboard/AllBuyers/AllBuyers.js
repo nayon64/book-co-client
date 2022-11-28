@@ -1,9 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
+import toast from 'react-hot-toast';
 import Loader from '../../../conponents/Loader/Loader';
 
 const AllBuyers = () => {
-	const { data: allBuyers = [], isLoading } = useQuery({
+	const { data: allBuyers = [], isLoading,refetch } = useQuery({
     queryKey: ["buyers"],
     queryFn: async () => {
       const res = await fetch("http://localhost:5000/allBuyers");
@@ -11,6 +12,19 @@ const AllBuyers = () => {
       return data;
     },
   });
+
+  const handleDeleteBuyer = (id) => {
+    console.log(id);
+    fetch(`http://localhost:5000/admin/deleteUser/${id}`, {
+      method: "PUT",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        toast.success("Successfully Seller Deleted!!!");
+        refetch();
+      });
+  };
 
   if (isLoading) {
     return <Loader></Loader>;
@@ -39,10 +53,12 @@ const AllBuyers = () => {
                   <td>{buyer.name}</td>
                   <td>{buyer.email}</td>
                   <td className="text-end">
-                    <button className="btn sm:btn-sm btn-xs btn-accent text-white rounded">
+                    <button
+                      onClick={() => handleDeleteBuyer(buyer?._id)}
+                      className="btn sm:btn-sm btn-xs btn-accent text-white rounded"
+                    >
                       Delete
                     </button>
-                    
                   </td>
                 </tr>
               ))}
@@ -50,7 +66,7 @@ const AllBuyers = () => {
           </table>
         </div>
       )}
-      {allBuyers?.length===0 && (
+      {allBuyers?.length === 0 && (
         <h2 className="text-3xl text-accent font-bold text-center my-4">
           No Buyer Found
         </h2>

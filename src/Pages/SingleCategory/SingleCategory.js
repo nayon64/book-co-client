@@ -23,14 +23,23 @@ const SingleCategory = () => {
   if (isLoading) {
     return <Loader></Loader>
   }
+  
 
 	return (
     <div className="max-w-7xl mx-auto">
-      <h1>Product hame</h1>
+      <h1 className="text-3xl my-6  text-primary font-bold text-center flex justify-center">
+        <span className='mr-4'>Book Category : </span>
+        {products.length > 0 ? (
+          products[0].bookCategory
+        ) : (
+          <p className="text-rose-400">No Book Item Found</p>
+        )}{" "}
+        <span>{}</span>
+      </h1>
       <div>
         {products && (
           <div className="grid md:grid-cols-2 lg:grid-cols-3  gap-6">
-            {products.map((product,i) => (
+            {products.map((product, i) => (
               <ProductCart
                 key={i}
                 product={product}
@@ -41,13 +50,13 @@ const SingleCategory = () => {
           </div>
         )}
       </div>
-      {bookingProduct &&
+      {bookingProduct && (
         <BookingModal
           setBookingProduct={setBookingProduct}
           bookingProduct={bookingProduct}
           refetch={refetch}
         ></BookingModal>
-      }
+      )}
     </div>
   );
 };

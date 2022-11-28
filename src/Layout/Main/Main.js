@@ -5,7 +5,7 @@ import Navbar from '../../Shared/Navbar/Navbar';
 
 const Main = () => {
 	return (
-		<div className='min-h-screen flex flex-col justify-between'>
+		<div>
 			<Navbar></Navbar>
 			<Outlet></Outlet>
 			<Footer></Footer>

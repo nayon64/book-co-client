@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
+import toast from 'react-hot-toast';
 import Loader from '../../../conponents/Loader/Loader';
 
 const AllSellers = () => {
@@ -23,6 +24,20 @@ const AllSellers = () => {
         refetch()
       });
   }
+
+  const handleDeleteSeller = id => {
+    console.log(id)
+    fetch(`http://localhost:5000/admin/deleteUser/${id}`, {
+      method:"PUT",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        toast.success("Successfully Seller Deleted!!!")
+        refetch()
+      });
+  }
+  
 
 	if (isLoading) {
 		return <Loader></Loader>
@@ -51,13 +66,14 @@ const AllSellers = () => {
                   <td>{seller.name}</td>
                   <td>{seller.email}</td>
                   <td className="text-end">
-                    <button className="btn sm:btn-sm btn-xs btn-accent text-white rounded">
+                    <button
+                      onClick={() => handleDeleteSeller(seller?._id)}
+                      className="btn sm:btn-sm btn-xs btn-accent text-white rounded"
+                    >
                       Delete
                     </button>
                     {seller?.sellerVarified ? (
-                      <button
-                        className="btn sm:btn-sm btn-xs btn-success text-white rounded ml-4"
-                      >
+                      <button className="btn sm:btn-sm btn-xs btn-success text-white rounded ml-4">
                         Verifed
                       </button>
                     ) : (

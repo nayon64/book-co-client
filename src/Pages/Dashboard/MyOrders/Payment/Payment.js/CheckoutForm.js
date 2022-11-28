@@ -9,7 +9,7 @@ const CheckoutForm = ({ bookingBook }) => {
   const [paymentLoading, setPaymentLoading] = useState(false);
   const [transactionId, setTransactionId] = useState("");
   const [clientSecret, setClientSecret] = useState("");
-	const { sellingPrice: price, buyerEmail, buyerName, _id } = bookingBook;
+	const { sellingPrice: price, buyerEmail, buyerName, _id ,bookItemId} = bookingBook;
 	console.log("bookingbook",bookingBook)
 
   const stripe = useStripe();
@@ -84,7 +84,7 @@ const CheckoutForm = ({ bookingBook }) => {
         transactionId: paymentIntent.id,
         buyerEmail,
         bookingId: _id,
-        // bookItemId:
+        bookItemId,
       };
 
       

@@ -13,7 +13,8 @@ const Blogs = () => {
 			return data
 		}
 		
-	})
+  })
+  
 	
   if (isLoading) {
     return <Loader></Loader>
