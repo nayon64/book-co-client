@@ -1,16 +1,18 @@
 import { format } from 'date-fns';
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { FaClock, FaMapMarkerAlt, FaUserEdit } from 'react-icons/fa';
 import { AuthContext } from '../../Context/AuthProvider/AuthProvider';
 import useAdmin from '../../hooks/useAdmin/useAdmin';
 import useSeller from '../../hooks/useSeller/useSeller';
+import checkMark from "../../assets/image/check-mark.png"
 
 const ProductCart = ({
   product,
   refetch,
   setBookingProduct,
 }) => {
+
 
   
   const {
@@ -26,9 +28,24 @@ const ProductCart = ({
     _id,
   } = product;
 
+  const [sellerVarify,setSellerVarify]=useState(false)
+
   const { user } = useContext(AuthContext);
   const [isAdmin] = useAdmin(user?.email);
   const [isSeller] = useSeller(user?.email);
+
+
+  useEffect(() => {
+    fetch(
+      `http://localhost:5000/seller/verifySeller?email=${product?.sellerEmail}`
+    )
+      .then(res => res.json())
+      .then(data => {
+      setSellerVarify(data.isVarify);
+    })
+  }, [product?.sellerEmail]);
+
+  console.log(sellerVarify)
 
   const date = new Date(publishDate);
   const pdate = format(date, "pp PP");
@@ -62,7 +79,8 @@ const ProductCart = ({
         </h2>
         <div className="flex justify-between items-center">
           <h5 className="font-semibold text-primary text-xl flex items-center">
-            <FaUserEdit className="text-secondary mr-1 " /> {sellerName}
+            <FaUserEdit className="text-secondary mr-1 " /> {sellerName}{" "}
+            {sellerVarify && <img className='w-6 my-auto ml-2' src={checkMark} alt="" />}
           </h5>
           {product?.isReported ? (
             <h5 className="font-semibold text-accent  text-lg cursor-pointer">
