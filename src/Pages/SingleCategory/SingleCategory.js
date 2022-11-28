@@ -26,6 +26,7 @@ const SingleCategory = () => {
 
 	return (
     <div className="max-w-7xl mx-auto">
+      <h1>Product hame</h1>
       <div>
         {products && (
           <div className="grid md:grid-cols-2 lg:grid-cols-3  gap-6">

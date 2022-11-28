@@ -2,49 +2,47 @@ import React, { useContext } from "react";
 import toast from "react-hot-toast";
 import { AuthContext } from "../../Context/AuthProvider/AuthProvider";
 
-const BookingModal = ({ bookingProduct ,setBookingProduct,refetch}) => {
+const BookingModal = ({ bookingProduct, setBookingProduct, refetch }) => {
+  // const {register,handleSubmit}=useForm()
 
-	// const {register,handleSubmit}=useForm()
+  const { user } = useContext(AuthContext);
 
-	const {user}=useContext(AuthContext)
+  const handleBookingConfirmanion = (event) => {
+    event.preventDefault();
+    const form = event.target;
+    const buyerMeetingLocation = form.buyerLocation.value;
+    const buyerPhoneNumber = form.buyerPhoneNumber.value;
+    bookingProduct["buyerMeetingLocation"] = buyerMeetingLocation;
+    bookingProduct["buyerPhoneNumber"] = buyerPhoneNumber;
+    bookingProduct["buyerName"] = user?.displayName;
+    bookingProduct["buyerEmail"] = user?.email;
+    bookingProduct["bookItemId"] = bookingProduct._id;
+    delete bookingProduct["_id"];
 
-	const handleBookingConfirmanion = event => {
-		event.preventDefault();
-		const form = event.target
-		const buyerMeetingLocation = form.buyerLocation.value
-		const buyerPhoneNumber = form.buyerPhoneNumber.value
-		bookingProduct["buyerMeetingLocation"] = buyerMeetingLocation
-		bookingProduct["buyerPhoneNumber"] = buyerPhoneNumber
-		bookingProduct["buyerName"] = user?.displayName;
-		bookingProduct["buyerEmail"] = user?.email
-		bookingProduct["bookItemId"]=bookingProduct._id
-		delete bookingProduct["_id"]
-		
-
-		fetch("http://localhost:5000/bookingItem", {
-			method: "POST",
-			headers: {
-				"content-type":"application/json"
-			},
-			body:JSON.stringify(bookingProduct)
-		})
-			.then(res => res.json())
-			.then(data => {
-				console.log(data)
-				if (data.acknowledged) {
-					toast.success('Book buying Successfull!!!')
-					setBookingProduct(null)
-					refetch()
-				}
-				if (!data.acknowledged && data.message === "All ready book the book") {
-					toast.error("You are all ready book this book. please check your order.");
-					setBookingProduct(null);
-					refetch();
-				}
-		})
-
-	}
-
+    fetch("http://localhost:5000/bookingItem", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(bookingProduct),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.acknowledged) {
+          toast.success("Book buying Successfull!!!");
+          setBookingProduct(null);
+          refetch();
+        }
+        if (!data.acknowledged && data.message === "All ready book the book") {
+          toast.error(
+            "You are all ready book this book. please check your order."
+          );
+          setBookingProduct(null);
+          refetch();
+        }
+      });
+  };
 
   return (
     <div>
@@ -114,9 +112,9 @@ const BookingModal = ({ bookingProduct ,setBookingProduct,refetch}) => {
                 </span>
               </label>
               <input
-							  type="text"
-							  name="buyerLocation"
-							  required
+                type="text"
+                name="buyerLocation"
+                required
                 placeholder="Write your Metting Location"
                 className="input input-bordered w-full "
               />
@@ -128,23 +126,29 @@ const BookingModal = ({ bookingProduct ,setBookingProduct,refetch}) => {
                 </span>
               </label>
               <input
-				type="text"
-				name="buyerPhoneNumber"
-				required
+                type="text"
+                name="buyerPhoneNumber"
+                required
                 placeholder="Write your moblie number"
                 className="input input-bordered w-full "
               />
             </div>
-            <div className="mt-6">
-              
-                
-                  <input
-                    className="px-3 py-2 bg-primary rounded hover:bg-secondary duration-500 cursor-pointer text-white"
-                    type="submit"
-                    value="Submit"
-                  />
-                
-              
+            <div className="flex">
+              <div className="mt-6">
+                <input
+                  className="px-3 py-2 bg-primary rounded hover:bg-secondary duration-500 cursor-pointer text-white"
+                  type="submit"
+                  value="Submit"
+                />
+              </div>
+              <div className="mt-6 ml-6">
+                <input
+                  onClick={() => setBookingProduct(null)}
+                  readOnly
+                  className="px-3 py-2 w-20 text-center bg-primary rounded hover:bg-secondary duration-500 cursor-pointer text-white"
+                  value="Cancle"
+                />
+              </div>
             </div>
           </form>
         </div>

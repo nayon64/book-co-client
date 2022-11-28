@@ -10,7 +10,7 @@ const CheckoutForm = ({ bookingBook }) => {
   const [transactionId, setTransactionId] = useState("");
   const [clientSecret, setClientSecret] = useState("");
 	const { sellingPrice: price, buyerEmail, buyerName, _id } = bookingBook;
-	console.log(bookingBook)
+	console.log("bookingbook",bookingBook)
 
   const stripe = useStripe();
   const elements = useElements();
@@ -84,7 +84,10 @@ const CheckoutForm = ({ bookingBook }) => {
         transactionId: paymentIntent.id,
         buyerEmail,
         bookingId: _id,
+        // bookItemId:
       };
+
+      
       fetch("http://localhost:5000/payments", {
         method: "POST",
         headers: {
