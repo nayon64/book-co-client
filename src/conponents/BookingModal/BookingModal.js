@@ -19,7 +19,7 @@ const BookingModal = ({ bookingProduct, setBookingProduct, refetch }) => {
     bookingProduct["bookItemId"] = bookingProduct._id;
     delete bookingProduct["_id"];
 
-    fetch("http://localhost:5000/bookingItem", {
+    fetch("https://book-and-co-server.vercel.app/bookingItem", {
       method: "POST",
       headers: {
         "content-type": "application/json",

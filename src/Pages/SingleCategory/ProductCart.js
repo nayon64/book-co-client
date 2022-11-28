@@ -37,7 +37,7 @@ const ProductCart = ({
 
   useEffect(() => {
     fetch(
-      `http://localhost:5000/seller/verifySeller?email=${product?.sellerEmail}`,
+      `https://book-and-co-server.vercel.app/seller/verifySeller?email=${product?.sellerEmail}`,
     )
       .then((res) => res.json())
       .then((data) => {
@@ -52,7 +52,7 @@ const ProductCart = ({
 
   const handleProductReport = (id) => {
     console.log("click", id);
-    fetch(`http://localhost:5000/bookReported/${id}`, {
+    fetch(`https://book-and-co-server.vercel.app/bookReported/${id}`, {
       method: "PUT",
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,

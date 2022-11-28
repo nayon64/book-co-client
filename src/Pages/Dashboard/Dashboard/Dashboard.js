@@ -11,7 +11,7 @@ const Dashboard = () => {
   const [isBuyer] = useBuyer(user?.email);
 
   return (
-    <div className="flex justify-center items-center mt-64 lg:mt-0 lg:min-h-screen">
+    <div className="flex justify-center items-center lg:min-h-screen">
       <div className="text-center">
         <h1 className="text-6xl font-bold text-Primary">WELLCOME TO</h1>
         <h1 className="text-6xl font-bold text-Primary">

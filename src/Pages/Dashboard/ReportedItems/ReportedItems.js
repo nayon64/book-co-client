@@ -8,7 +8,7 @@ const ReportedItems = () => {
   const { data: reportedItems = [], isLoading,refetch } = useQuery({
     queryKey: ["reportedItems"],
     queryFn: async () => {
-      const res = await fetch("http://localhost:5000/reportedItems", {
+      const res = await fetch("https://book-and-co-server.vercel.app/reportedItems", {
         headers: {
           authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         },
@@ -21,7 +21,7 @@ const ReportedItems = () => {
 
   const handleDeleteBookItem = (id) => {
     console.log(id)
-    fetch(`http://localhost:5000/admin/reportedItems/${id}`, {
+    fetch(`https://book-and-co-server.vercel.app/admin/reportedItems/${id}`, {
       method: "DELETE",
       headers: {
             authorization: `Bearer ${localStorage.getItem("accessToken")}`,

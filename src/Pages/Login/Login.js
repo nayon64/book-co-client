@@ -1,14 +1,14 @@
-import React, { useContext, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import { FaEye, FaEyeSlash } from "react-icons/fa";
-import googleImg from "../../assets/image/google.png";
-import { useForm } from "react-hook-form";
-import CustomButton from "../../conponents/CustomButton/CustomButton";
-import { AuthContext } from "../../Context/AuthProvider/AuthProvider";
 import { GoogleAuthProvider } from "firebase/auth";
+import React, { useContext, useState } from "react";
+import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import useToken from "../../hooks/useToken/useToken";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import googleImg from "../../assets/image/google.png";
+import CustomButton from "../../conponents/CustomButton/CustomButton";
 import SmallLoader from "../../conponents/Loader/SmallLoader";
+import { AuthContext } from "../../Context/AuthProvider/AuthProvider";
+import useToken from "../../hooks/useToken/useToken";
 
 const Login = () => {
   const { register, handleSubmit, reset } = useForm();
@@ -56,7 +56,7 @@ const Login = () => {
         };
 
         // if user are not registered, then user add in database
-        fetch("http://localhost:5000/users", {
+        fetch("https://book-and-co-server.vercel.app/users", {
           method: "POST",
           headers: {
             "content-type": "application/json",

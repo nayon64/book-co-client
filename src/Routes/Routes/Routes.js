@@ -90,7 +90,7 @@ const router = createBrowserRouter([
           </BuyerRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/payment/${params.id}`),
+          fetch(`https://book-and-co-server.vercel.app/payment/${params.id}`),
       },
       {
         path: "/dashboard/allsellers",

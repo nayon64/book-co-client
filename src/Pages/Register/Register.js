@@ -75,7 +75,7 @@ const Register = () => {
                     role: data.role,
                   };
 
-                  fetch("http://localhost:5000/users", {
+                  fetch("https://book-and-co-server.vercel.app/users", {
                     method: "POST",
                     headers: {
                       "content-type": "application/json",
@@ -118,7 +118,7 @@ const Register = () => {
           role: "Buyer",
         };
 
-        fetch("http://localhost:5000/users", {
+        fetch("https://book-and-co-server.vercel.app/users", {
           method: "POST",
           headers: {
             "content-type": "application/json",

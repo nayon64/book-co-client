@@ -23,7 +23,7 @@ const AddAProduct = () => {
   const { data: bookCategorys = [] , isLoading} = useQuery({
     queryKey: ["categoryNames"],
     queryFn: async () => {
-      const res = await fetch("http://localhost:5000/categoryNames", {
+      const res = await fetch("https://book-and-co-server.vercel.app/categoryNames", {
         headers: {
           authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         },
@@ -64,10 +64,11 @@ const AddAProduct = () => {
             sellerEmail: user.email,
             publishDate: new Date(),
             sellerName: user.displayName,
+            isAvailable: true,
           };
 
           // post book data in database 
-          fetch("http://localhost:5000/seller/addBookItem", {
+          fetch("https://book-and-co-server.vercel.app/seller/addBookItem", {
             method: "POST",
             headers: {
               "content-type": "application/json",

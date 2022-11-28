@@ -14,7 +14,7 @@ const SingleCategory = () => {
   const { data: products = [],isLoading ,refetch} = useQuery({
     queryKey: ["singleCategory"],
     queryFn: async () => {
-      const res = await fetch(`http://localhost:5000/singleCategory/${id}`, {
+      const res = await fetch(`https://book-and-co-server.vercel.app/singleCategory/${id}`, {
         headers: {
           authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         },
@@ -31,8 +31,8 @@ const SingleCategory = () => {
 
 	return (
     <div className="max-w-7xl mx-auto">
-      <h1 className="text-3xl my-6  text-primary font-bold text-center flex justify-center">
-        <span className='mr-4'>Book Category : </span>
+      <h1 className="md:text-3xl text-xl my-6  text-primary font-bold text-center flex justify-center">
+        <span className="mr-4">Book Category : </span>
         {products.length > 0 ? (
           products[0].bookCategory
         ) : (
@@ -42,7 +42,7 @@ const SingleCategory = () => {
       </h1>
       <div>
         {products && (
-          <div className="grid md:grid-cols-2 lg:grid-cols-3  gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 px-4 md:px-0  gap-6">
             {products.map((product, i) => (
               <ProductCart
                 key={i}
