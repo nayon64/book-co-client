@@ -41,6 +41,22 @@ const MyProducts = () => {
     })
   }
 
+  const handleDelete = (id) => {
+     fetch(`https://book-and-co-server.vercel.app/admin/reportedItems/${id}`, {
+       method: "DELETE",
+       headers: {
+         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+       },
+     })
+       .then((res) => res.json())
+       .then((data) => {
+         if (data.acknowledged) {
+           refetch();
+           toast.success("Book Item Successfully Deleted.");
+         }
+       });
+  }
+
 	if (isLoading) {
 		return <Loader></Loader>
 	}
@@ -102,7 +118,7 @@ const MyProducts = () => {
                         )}
                       </>
                     )}
-                    <button className="btn sm:btn-sm ml-4 btn-xs btn-accent text-white rounded">
+                    <button onClick={()=>handleDelete(book?._id)} className="btn sm:btn-sm ml-4 btn-xs btn-accent text-white rounded">
                       Delete
                     </button>
                   </td>

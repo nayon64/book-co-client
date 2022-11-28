@@ -2,6 +2,9 @@
 
 Live site Link [Book and Co](https://book-and-co.web.app/).
 
+Admin Email: nayonroy64@gmail.com
+password: 123456@Na
+
 ## About of website
 
 This is the book reseller website. a buyer can buy a book in this site. A seller ca sale your unusable book ,but he can buy any book. 

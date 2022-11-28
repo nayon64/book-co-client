@@ -20,7 +20,7 @@ const ReportedItems = () => {
 
 
   const handleDeleteBookItem = (id) => {
-    console.log(id)
+    
     fetch(`https://book-and-co-server.vercel.app/admin/reportedItems/${id}`, {
       method: "DELETE",
       headers: {
