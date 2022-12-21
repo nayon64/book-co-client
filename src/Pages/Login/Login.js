@@ -56,7 +56,7 @@ const Login = () => {
         };
 
         // if user are not registered, then user add in database
-        fetch("https://book-and-co-server.vercel.app/users", {
+        fetch("https://book-co-server.vercel.app/users", {
           method: "POST",
           headers: {
             "content-type": "application/json",

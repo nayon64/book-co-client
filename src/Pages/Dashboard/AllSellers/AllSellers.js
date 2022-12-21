@@ -8,7 +8,7 @@ const AllSellers = () => {
 	const {data:allSellers=[] ,isLoading,refetch} = useQuery({
 		queryKey: ["sellers"],
 		queryFn: async () => {
-      const res = await fetch("https://book-and-co-server.vercel.app/allSellers", {
+      const res = await fetch("https://book-co-server.vercel.app/allSellers", {
         headers: {
           authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         },
@@ -19,7 +19,7 @@ const AllSellers = () => {
   })
   
   const handleSellerVarified = (email) => {
-    fetch(`https://book-and-co-server.vercel.app/admin/sellerVarified?email=${email}`, {
+    fetch(`https://book-co-server.vercel.app/admin/sellerVarified?email=${email}`, {
       method: "PUT",
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
@@ -34,7 +34,7 @@ const AllSellers = () => {
 
   const handleDeleteSeller = id => {
     console.log(id)
-    fetch(`https://book-and-co-server.vercel.app/admin/deleteUser/${id}`, {
+    fetch(`https://book-co-server.vercel.app/admin/deleteUser/${id}`, {
       method: "PUT",
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,

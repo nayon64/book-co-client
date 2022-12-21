@@ -14,7 +14,7 @@ const SingleCategory = () => {
   const { data: products = [],isLoading ,refetch} = useQuery({
     queryKey: ["singleCategory"],
     queryFn: async () => {
-      const res = await fetch(`https://book-and-co-server.vercel.app/singleCategory/${id}`, {
+      const res = await fetch(`https://book-co-server.vercel.app/singleCategory/${id}`, {
         headers: {
           authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         },

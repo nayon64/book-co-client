@@ -11,7 +11,7 @@ const Advertised = () => {
   } = useQuery({
     queryKey: ["advertised"],
     queryFn: async () => {
-      const res = await fetch("https://book-and-co-server.vercel.app/advertised",);
+      const res = await fetch("https://book-co-server.vercel.app/advertised",);
       const data = res.json();
       return data;
     },

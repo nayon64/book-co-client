@@ -12,7 +12,7 @@ const MyProducts = () => {
     queryKey: ["myBooks"],
     queryFn: async () => {
       const res = await fetch(
-        `https://book-and-co-server.vercel.app/seller/myBooks?email=${user?.email}`,
+        `https://book-co-server.vercel.app/seller/myBooks?email=${user?.email}`,
         {
           headers: {
             authorization: `Bearer ${localStorage.getItem("accessToken")}`,
@@ -26,7 +26,7 @@ const MyProducts = () => {
 	
   const handleAdvertised = (id) => {
     
-    fetch(`https://book-and-co-server.vercel.app/seller/advertised/${id}`, {
+    fetch(`https://book-co-server.vercel.app/seller/advertised/${id}`, {
       method: "PUT",
       headers: {
             authorization: `Bearer ${localStorage.getItem("accessToken")}`,
@@ -42,7 +42,7 @@ const MyProducts = () => {
   }
 
   const handleDelete = (id) => {
-     fetch(`https://book-and-co-server.vercel.app/admin/reportedItems/${id}`, {
+     fetch(`https://book-co-server.vercel.app/admin/reportedItems/${id}`, {
        method: "DELETE",
        headers: {
          authorization: `Bearer ${localStorage.getItem("accessToken")}`,

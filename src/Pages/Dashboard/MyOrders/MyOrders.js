@@ -11,7 +11,7 @@ const MyOrders = () => {
 		queryKey: ["myOrders"],
 		queryFn: async () => {
       const res = await fetch(
-        `https://book-and-co-server.vercel.app/buyer/myOrders?email=${user?.email}`,
+        `https://book-co-server.vercel.app/buyer/myOrders?email=${user?.email}`,
         {
           headers: {
             authorization: `Bearer ${localStorage.getItem("accessToken")}`,

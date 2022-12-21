@@ -6,7 +6,7 @@ const useSeller = (email) => {
 
   useEffect(() => {
     if (email) {
-      fetch(`https://book-and-co-server.vercel.app/users/seller/${email}`)
+      fetch(`https://book-co-server.vercel.app/users/seller/${email}`)
         .then((res) => res.json())
         .then((data) => {
           setIsSeller(data.isSeller);
