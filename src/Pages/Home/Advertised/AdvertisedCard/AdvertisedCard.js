@@ -2,7 +2,6 @@ import React from 'react';
 import saleIcon from "../../../../assets/image/saleIcon.png"
 
 const AdvertisedCard = ({ product }) => {
-	console.log(product)
 	return (
     <div>
       <div className="hero bg-base-200 rounded-lg">
