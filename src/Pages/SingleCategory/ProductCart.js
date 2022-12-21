@@ -74,35 +74,35 @@ const ProductCart = ({
   return (
     <div className="card bg-base-100 shadow-xl">
       <figure className="px-5 pt-10">
-        <img src={bookImg} alt="Shoes" className="rounded-xl w-24" />
+        <img src={bookImg} alt="Shoes" className="rounded-xl w-20" />
       </figure>
       <div className="card-body">
-        <h2 className="card-title text-center text-2xl text-secondary font-bold">
+        <h2 className="card-title text-center text-xl text-secondary font-bold">
           {bookName}
         </h2>
         <div className="flex justify-between items-center">
-          <h5 className="font-semibold text-primary text-xl flex items-center">
-            <FaUserEdit className="text-secondary mr-1 " /> {sellerName}{" "}
-            {sellerVarify && <img className='w-6 my-auto ml-2' src={checkMark} alt="" />}
+          <h5 className="font-semibold text-sm text-primary flex items-center">
+            <FaUserEdit className="text-secondary mr-1 text-sm" /> {sellerName}{" "}
+            {sellerVarify && <img className='w-3 my-auto ml-2' src={checkMark} alt="" />}
           </h5>
           {product?.isReported ? (
-            <h5 className="font-semibold text-accent  text-lg cursor-pointer">
+            <h5 className="font-semibold text-accent  text-xs cursor-pointer">
               Product Reported
             </h5>
           ) : (
             <h5
               onClick={() => handleProductReport(_id)}
-              className="font-semibold text-primary  text-lg cursor-pointer"
+              className="font-semibold text-primary  text-xs cursor-pointer"
             >
               Report To Admin
             </h5>
           )}
         </div>
-        <p className="text-base flex items-center">
+        <p className="text-xs font-semibold flex items-center">
           <FaClock />
           <span className="font-semibold text-lg ml-1"></span> {pdate}
         </p>
-        <p className="text-sm text-gray-500">
+        <p className="text-xs text-gray-500">
           {bookDescription.length > 100 ? (
             <span>{bookDescription.slice(0, 100)}...</span>
           ) : (
@@ -114,19 +114,19 @@ const ProductCart = ({
             <FaMapMarkerAlt className="mr-1" /> {sellerLocation}
           </p>
           <p className="text-end">
-            <span className="text-base font-bold">Used : </span> {bookUsed}
+            <span className="text-sm font-bold">Used : </span> {bookUsed}
           </p>
         </div>
-        <div className="flex justify-between items-center mt-4">
-          <div className="font-semibold text-2xl text-accent">
-            <span className="text-3xl font-bold">${sellingPrice}</span>
+        <div className="flex justify-between items-center mt-1">
+          <div className="font-semibold text-sm text-accent">
+            <span className="text-xl font-bold">${sellingPrice}</span>
             <span className="line-through ml-2">${originalPrice}</span>
           </div>
           {!isAdmin && !isSeller ? (
             <label
               htmlFor="booking-modal"
               onClick={() => handleProductBooking(product)}
-              className="px-2 py-2 bg-primary rounded text-white hover:bg-secondary duration-500 cursor-pointer"
+              className="px-2 py-1 bg-primary rounded text-white hover:bg-secondary duration-500 text-sm font-semibold cursor-pointer"
             >
               Book Now
             </label>

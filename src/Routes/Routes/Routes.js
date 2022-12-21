@@ -49,11 +49,7 @@ const router = createBrowserRouter([
       },
       {
         path: `/singleCategory/:id`,
-        element: (
-          <PrivateRoute>
-            <SingleCategory></SingleCategory>
-          </PrivateRoute>
-        ),
+        element: <SingleCategory></SingleCategory>,
       },
     ],
   },

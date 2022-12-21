@@ -42,7 +42,7 @@ const SingleCategory = () => {
       </h1>
       <div>
         {products && (
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 px-4 md:px-0  gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 px-4 md:px-0  gap-6">
             {products.map((product, i) => (
               <ProductCart
                 key={i}
