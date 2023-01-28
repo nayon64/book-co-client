@@ -5,7 +5,7 @@ import Navbar from '../../Shared/Navbar/Navbar';
 
 const Main = () => {
 	return (
-		<div>
+		<div className='bg-secondary relative'>
 			<Navbar></Navbar>
 			<Outlet></Outlet>
 			<Footer></Footer>

@@ -9,16 +9,15 @@ import DashboardNavbar from "../../Shared/DashboardNavbar/DashboardNavbar";
 const DashboardLayout = () => {
 
   const { user } = useContext(AuthContext)
-
   const [isAdmin] = useAdmin(user?.email)
   const [isSeller] = useSeller(user?.email)
   const [isBuyer]=useBuyer(user?.email)
   
 
   return (
-    <div>
+    <div className="bg-secondary relative">
       <DashboardNavbar></DashboardNavbar>
-      <div className="drawer drawer-mobile max-w-7xl mx-auto mt-6">
+      <div className="drawer drawer-mobile max-w-7xl mx-auto ">
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content ">
           <Outlet></Outlet>

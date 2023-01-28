@@ -6,7 +6,7 @@ module.exports = {
       {
         bookAndCo: {
           primary: "#4476AC",
-          secondary: "#1D3151",
+          secondary: "#14213D",
           accent: "#E06A4F",
           neutral: "#3D4451",
           "base-100": "#FFFFFF",

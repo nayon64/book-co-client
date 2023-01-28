@@ -10,7 +10,7 @@ const Feedback = () => {
 		queryFn: async () => {
 			const res = await fetch(`https://book-co-server.vercel.app/feedbacks`);
 			const data = await res.json()
-			return data.slice(0,4)
+			return data.slice(0,3)
 		}
 	})
 	console.log(feedbacks)
@@ -25,11 +25,8 @@ const Feedback = () => {
         Feedbacks
       </h1>
       <div className="grid lg:grid-cols-3 md:grid-cols-2 p-4 gap-4 mt-10">
-        {feedbacks.map((category) => (
-          <Link key={category._id}  to={`/singleCategory/${category._id}`}>
-            <FeedbackCard feedback={category}></FeedbackCard>
-          </Link>
-        ))}
+        {feedbacks.map((category,i) => <FeedbackCard key={i} feedback={category}></FeedbackCard>  
+        )}
       </div>
     </section>
   );

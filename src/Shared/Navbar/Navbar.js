@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import logo from "../../assets/image/logo.png"
 import CustomButton from '../../conponents/CustomButton/CustomButton';
 import { AuthContext } from '../../Context/AuthProvider/AuthProvider';
@@ -8,28 +8,42 @@ const Navbar = () => {
 
   const { user, logOut } = useContext(AuthContext);
 
-  // const handleLogOut = () => {
-  //   logOut()
-  // }
 
-	// navbar menu item 
-	const menuItems = (
+  const menuRoutes = [
+    {
+      name: "Home",
+      path: "/home",
+    },
+    {
+      name: "Blogs",
+      path: "/blogs",
+    },
+    {
+      name: "Dashboard",
+      path: "/dashboard",
+    },
+  ];
+  const menus = (
     <>
-      <li>
-        <Link to="/home">Home</Link>
-      </li>
-      <li>
-        <Link to="/blogs">Blogs</Link>
-      </li>
-      <li>
-        <Link to="/dashboard">Dashboard</Link>
-      </li>
+      {menuRoutes.map((menu, i) => (
+        <NavLink
+          to={menu.path}
+          key={i}
+          className={({ isActive }) =>
+            isActive
+              ? "bg-slate-800 font-extrabold text-white rounded py-2 px-3 "
+              : "py-2 px-3 rounded-sm"
+          }
+        >
+          {menu.name}
+        </NavLink>
+      ))}
     </>
   );
 
 	return (
-    <div>
-      <div className="navbar max-w-7xl mx-auto py-2 px-4">
+    <div className='sticky top-0 z-40'>
+      <div className="navbar max-w-7xl mx-auto py-2 px-4  bg-white ">
         <div className="navbar-start">
           <div className="dropdown">
             <label tabIndex={0} className="btn btn-ghost lg:hidden mr-3">
@@ -50,9 +64,9 @@ const Navbar = () => {
             </label>
             <ul
               tabIndex={0}
-              className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52 "
+              className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
             >
-              {menuItems}
+              {menus}
             </ul>
           </div>
           <Link to="/" className="h-12">
@@ -60,25 +74,26 @@ const Navbar = () => {
           </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal p-0">{menuItems}</ul>
+          <ul className="menu menu-horizontal p-0  text-secondary font-semibold">
+            {menus}
+          </ul>
         </div>
         <div className="navbar-end ">
           {user?.uid ? (
             <>
-                <CustomButton>
-                  <span onClick={logOut}>LogOut</span>
-                </CustomButton>
-                <div
-                  className="tooltip tooltip-bottom"
-                  data-tip={user.displayName}
-                >
-                  <div className="avatar">
-                    <div className="w-10 ml-3 border rounded-full cursor-pointer">
-                      <img src={user.photoURL} alt="" />
-                    </div>
+              <CustomButton>
+                <span onClick={logOut}>LogOut</span>
+              </CustomButton>
+              <div
+                className="tooltip tooltip-bottom flex justify-center items-center"
+                data-tip={user.displayName}
+              >
+                <div className="avatar ">
+                  <div className="w-10 ml-3 border rounded-full cursor-pointer">
+                    <img src={user.photoURL} alt="" />
                   </div>
                 </div>
-              
+              </div>
             </>
           ) : (
             <Link to="/login">
