@@ -1,14 +1,14 @@
 import React from 'react';
-import readingBook from "../../../assets/image/Reading book-pana.png"
+import Banner1 from '../Banner/Banner1';
 
 const HomeBanner = () => {
 	return (
-    <div className="hero min-h-96">
-      <div className="hero-content flex-col lg:flex-row-reverse ">
-        <div className="lg:w-1/2">
-          <img src={readingBook} className="w-full" alt="" />
+    <div className="hero py-12 bg-slate-800 mt-6 md:px-8">
+      <div className=" grid md:grid-cols-2 gap-4">
+        <div className='md:order-2'>
+          <Banner1></Banner1>
         </div>
-        <div className="lg:w-1/2 text-center lg:text-start py-6">
+        <div className=" text-center lg:text-start py-6 md:order-1 p-4 md:p-0">
           <h1 className="text-5xl  font-bold text-primary leading-tight">
             <span className="text-accent"> Sell</span> your unusable books and
             <span className="text-accent"> buy</span> your necessary books

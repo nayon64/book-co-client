@@ -1,5 +1,7 @@
 import React from 'react';
 import Advertised from '../Advertised/Advertised';
+import Banner from '../Banner/Banner';
+import Banner1 from '../Banner/Banner1';
 import Categorys from '../Categorys/Categorys';
 import Feedback from '../Feedback/Feedback';
 import HomeBanner from '../HomeBanner/HomeBanner';
@@ -13,6 +15,8 @@ const Home = () => {
       <Categorys></Categorys>
       <UpdateNews></UpdateNews>
       <Feedback></Feedback>
+      {/* <Banner></Banner> */}
+      <Banner1></Banner1>
     </div>
   );
 };
