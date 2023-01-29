@@ -30,10 +30,13 @@ const Feedback = () => {
   }
 
   return (
-    <section className="md:mt-16 mt-6">
-      <h1 className="text-center text-primary font-bold text-4xl divider">
-        Feedbacks
-      </h1>
+    <section className="md:mt-16 mt-6 p-6">
+      
+        <div className="text-white inline-block p-6 text-center border-t-4 border-l-4">
+          <h1 className="font-bold text-4xl ">Customers Feedback</h1>
+          <p className="text-lg text-gray-300">share your own mind for other customer.</p>
+        </div>
+      
       <div className="md:h-[80vh] h-80 my-12  pr-8  md:pr-16 bg-contain  relative rounded-2xl overflow-hidden flex items-center">
         <Swiper
           direction={"vertical"}

@@ -1,11 +1,11 @@
 import React from 'react';
 import Advertised from '../Advertised/Advertised';
-import Banner1 from '../Banner/Banner1';
 import BlogsSection from '../BlogsSection/BlogsSection';
 import Categorys from '../Categorys/Categorys';
 import Feedback from '../Feedback/Feedback';
 import HomeBanner from '../HomeBanner/HomeBanner';
 import OurServices from '../OurServices/OurServices';
+import Suscription from '../Suscription/Suscription';
 import UpdateNews from '../UpdateNews/UpdateNews';
 
 const Home = () => {
@@ -18,6 +18,7 @@ const Home = () => {
       <UpdateNews></UpdateNews>
       <Feedback></Feedback>
       <BlogsSection></BlogsSection>
+      <Suscription></Suscription>
     </div>
   );
 };

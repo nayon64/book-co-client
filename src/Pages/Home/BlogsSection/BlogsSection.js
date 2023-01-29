@@ -23,8 +23,16 @@ const BlogsSection = () => {
   console.log("blogs", blogs);
 
   return (
-    <div>
-      <div>
+    <div className="p-8">
+      <div className="flex justify-end">
+        <div className="text-white inline-block p-6 text-center border-t-4 border-r-4">
+          <h1 className="font-bold text-4xl ">Our Recent Publist Blogs</h1>
+          <p className="text-lg text-gray-300">
+            write blog and get knowledge of education.
+          </p>
+        </div>
+      </div>
+      <div className="my-12">
         <Swiper
           slidesPerView={3}
           spaceBetween={30}
@@ -37,7 +45,6 @@ const BlogsSection = () => {
             clickable: true,
           }}
           modules={[FreeMode, Pagination, Autoplay]}
-          
         >
           {blogs.map((blog) => (
             <SwiperSlide key={blog._id}>

@@ -2,6 +2,7 @@ import React from "react";
 
 const BlogCard = ({ blog }) => {
   return (
+    
     <div
       className="bg-cever bg-center bg-no-repeat h-96"
       style={{

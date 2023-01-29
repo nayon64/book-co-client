@@ -15,7 +15,7 @@ const HomeBanner = () => {
             <Banner1></Banner1>
           </div>
           <div className=" text-center flex flex-col justify-center  bg-white bg-opacity-20 lg:text-start py-6 md:order-1 p-4 md:p-5 rounded-md">
-            <h1 className="text-5xl  font-bold text-white leading-tight">
+            <h1 className="text-4xl  font-bold text-white leading-tight">
               <span className="text-accent"> Sell</span> your unusable books and
               <span className="text-accent"> buy</span> your necessary books
               easily...
@@ -23,20 +23,6 @@ const HomeBanner = () => {
             <p className="py-6 text-xl text-white">
               Find the book your"re looking for easier to read right away.
             </p>
-            <form>
-              <div>
-                <input
-                  type="text"
-                  placeholder="Search Here"
-                  className="input input-bordered border-primary w-full max-w-md"
-                />
-                <input
-                  className="btn btn-primary mt-6 md:mt-0 ml-6"
-                  type="submit"
-                  value="Search"
-                />
-              </div>
-            </form>
           </div>
         </div>
       </div>
