@@ -20,10 +20,11 @@ const Categorys = () => {
   }
 
 	return (
-    <section className='md:mt-16 mt-6'>
-      <h1 className="text-center text-primary font-bold text-4xl divider">
-        Books Categorys
-      </h1>
+    <section className="md:mt-16 mt-6 p-8">
+      <div className="text-white inline-block p-6 text-center border-t-4 border-l-4">
+        <h1 className="font-bold text-4xl ">Books Categroys</h1>
+        <p className="text-lg text-gray-300">get your most favorite book.</p>
+      </div>
       <div className="grid lg:grid-cols-3 md:grid-cols-2 p-4 gap-4 mt-10">
         {categorys.map((category) => (
           <Link key={category._id} to={`/singleCategory/${category._id}`}>

@@ -6,7 +6,8 @@ import Feedback from '../Feedback/Feedback';
 import HomeBanner from '../HomeBanner/HomeBanner';
 import OurServices from '../OurServices/OurServices';
 import Suscription from '../Suscription/Suscription';
-import UpdateNews from '../UpdateNews/UpdateNews';
+// import UpdateNews from '../UpdateNews/UpdateNews';
+import VideoSection from '../VideoSection/VideoSection';
 
 const Home = () => {
 	return (
@@ -15,7 +16,8 @@ const Home = () => {
       <OurServices></OurServices>
       <Advertised></Advertised>
       <Categorys></Categorys>
-      <UpdateNews></UpdateNews>
+      <VideoSection></VideoSection>
+      {/* <UpdateNews></UpdateNews> */}
       <Feedback></Feedback>
       <BlogsSection></BlogsSection>
       <Suscription></Suscription>

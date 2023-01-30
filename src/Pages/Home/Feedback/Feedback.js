@@ -1,6 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
-import { Link } from "react-router-dom";
 import Loader from "../../../conponents/Loader/Loader";
 import FeedbackCard from "./FeedbackCard";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -43,7 +42,7 @@ const Feedback = () => {
           pagination={true}
           loop={true}
           autoplay={{
-            delay: 6000,
+            delay: 4000,
           }}
           modules={[Pagination, Autoplay]}
           className="h-5/6 bg-emerald-700 rounded-xl overflow-hidden"
