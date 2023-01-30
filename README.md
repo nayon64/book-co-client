@@ -2,8 +2,6 @@
 
 Live site Link [Book and Co](https://book-and-co.web.app/).
 
-Admin Email: nayonroy64@gmail.com
-password: 123456@Na
 
 ## About of website
 
